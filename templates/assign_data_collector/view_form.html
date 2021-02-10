@@ -1,0 +1,102 @@
+{% include 'header.html' %}
+{% load static %}
+
+
+
+
+
+ <div class="main-content" id="panel" style="margin-top:10px;">
+     {% if messages %}
+        <div class="messages" style="margin:20px;">
+            {% for message in messages %}
+                <div class="alert alert-primary" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+
+        <div class="col-xl-12 order-xl-1">
+          <div class="card">
+            <div class="card-header bg-primary">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3> Assign Data Collector</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <form method="POST">
+                  {% csrf_token %}
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Company Name</label>
+                        <input type="text" placeholder="Visited Company name" class="form-control" value="{{ obj.company_name }}" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Purpose Of Visit</label>
+                        <input type="text" placeholder="Purpose Of Visit" class="form-control" value="{{ obj.purpose_of_visit }}"  required>
+                      </div>
+                    </div>
+                  </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label">Assign Data Collector</label>
+                            <input type="text"  placeholder="Enter Address" class="form-control" value="{{ obj.assign_data_collector }}" required>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                              <div class="form-group">
+                                <label class="form-control-label">Country</label>
+                                <input type="text"  placeholder="Enter Address" class="form-control" value="{{ obj.country.country_name }}" required>
+                              </div>
+                            </div>
+                      </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Division</label>
+                        <input type="text" class="form-control" value="{{ obj.division.division_name }}" required>
+                      </div>
+                    </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label">District</label>
+                            <input type="text"  placeholder="Enter Address" class="form-control" value="{{ obj.district.district_name }}" required>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Sub District</label>
+                        <input type="text" class="form-control" value="{{ obj.sub_district.subdistrct_name }}" required>
+                      </div>
+                    </div>
+                        <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Address</label>
+                        <input type="text" placeholder="Enter Address" class="form-control" value="{{ obj.area }}" required>
+                      </div>
+                    </div>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% include 'footer.html' %}

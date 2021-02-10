@@ -1,0 +1,120 @@
+{% include 'header.html' %}
+{% load static %}
+
+
+
+
+
+ <div class="main-content" id="panel" style="margin-top:10px;">
+     {% if messages %}
+        <div class="messages" style="margin:20px;">
+            {% for message in messages %}
+                <div class="alert alert-primary" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+
+        <div class="col-xl-12 order-xl-1">
+          <div class="card">
+            <div class="card-header bg-primary">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3>Data Collecting Company</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+               <button class="btn btn-primary">Collecting information by {{ data.data_collector }}</button>
+              <form method="POST">
+                <div class="pl-lg-4 mt-2">
+                  <div class="row">
+                    <div class="col-lg-4">
+                         <img src="{{data.picture.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                    </div>
+                    <div class="col-lg-4">
+                          <img src="{{data.picture.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                    </div>
+                    <div class="col-lg-4">
+                           <img src="{{data.picture.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                    </div>
+                    </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">Company Or Individual Name</label>
+                        <input type="text" name="fname" id="input-first-name" class="form-control" value="{{ data.visited_company_name }}" >
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Contact Person Name</label>
+                        <input type="text" name="lname" id="input-last-name" class="form-control" value="{{ data.contact_person_name }}" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Designation Of The Contact Person</label>
+                        <input type="text" name="graduation_subject" id="input-username" class="form-control" value="{{ data.designation_of_contact_person }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Purpose Of Visit</label>
+                        <input type="text" name="university" id="input-email" class="form-control" value="{{ data.purpose_of_visit }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Phone</label>
+                        <input type="text" name="Skills" class="form-control" value="{{ data.contact_no }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email</label>
+                        <input type="text" name="experience" class="form-control" value="{{ data.email }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-designation">Package Name</label>
+                        <input type="text" name="designation" id="input-designation" class="form-control" value="{{ data.package_name}}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-password">Address</label>
+                        <input type="text" name="password" id="input-password" class="form-control" value="{{ data.address }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-designation">Description</label>
+                          <textarea name="" id="" cols="30" rows="5" class="form-control">{{ data.description }}</textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% include 'footer.html' %}

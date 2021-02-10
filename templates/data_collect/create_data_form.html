@@ -1,0 +1,120 @@
+{% include 'header.html' %}
+{% load static %}
+
+
+
+
+
+ <div class="main-content" id="panel" style="margin-top:10px;">
+     {% if messages %}
+        <div class="messages" style="margin:20px;">
+            {% for message in messages %}
+                <div class="alert alert-primary" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+
+        <div class="col-xl-12 order-xl-1">
+          <div class="card">
+            <div class="card-header bg-primary">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3>Data Collecting Company</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                <div class="pl-lg-4">
+                    <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Take A Pickture <span style="color:red">*</span></label>
+                        <input type="file" name="picture" class="form-control"  required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Company Or Individual Name <span style="color:red">*</span></label>
+                        <input type="text" name="visited_company_name" placeholder="Enter Visited Company name" class="form-control" value="{{ data.visited_company_name }}" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Contact Person Name <span style="color:red">*</span></label>
+                        <input type="text" name="contact_person_name" placeholder="Enter Contact Person" class="form-control" value="{{ data.contact_person_name }}" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Designation Of The Contact Person <span style="color:red">*</span></label>
+                        <input type="text" name="designation_of_contact_person" placeholder="Enter Designation Of The Contact Person"  class="form-control" value="{{ data.designation_of_contact_person }}" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Purpose Of Visit <span style="color:red">*</span></label>
+                        <input type="text" name="purpose_of_visit" placeholder="Enter Purpose Of Visit" class="form-control" value="{{ data.purpose_of_visit }}" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Phone <span style="color:red">*</span></label>
+                        <input type="text" name="contact_no" placeholder="Contact Number" class="form-control" value="{{ data.contact_no }}" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Email<span style="color:red">*</span></label>
+                        <input type="email" name="email" placeholder="Enter Email" class="form-control" value="{{ data.email }}" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Package Name <span style="color:red">*</span></label>
+                        <input type="text" name="package_name" placeholder="Enter Package name" class="form-control" value="{{ data.package_name}}" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Address <span style="color:red">*</span></label>
+                        <input type="text" name="address" placeholder="Enter Address" class="form-control" value="{{ data.address }}" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <label class="form-control-label">Description <span style="color:red">*</span></label>
+                          <textarea name="description" id="" cols="30" rows="5" class="form-control" required>{{ data.description }}</textarea>
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-lg-12">
+                        <button class="btn btn-primary float-right" type="submit">Submit</button>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% include 'footer.html' %}

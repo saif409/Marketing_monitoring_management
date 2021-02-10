@@ -1,0 +1,126 @@
+{% include 'header.html' %}
+{% load static %}
+
+
+
+
+
+ <div class="main-content" id="panel" style="margin-top:10px;">
+     {% if messages %}
+        <div class="messages" style="margin:20px;">
+            {% for message in messages %}
+                <div class="alert alert-primary" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+
+        <div class="col-xl-12 order-xl-1">
+          <div class="card">
+            <div class="card-header bg-primary">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3> Assign Data Collector</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <form method="POST">
+                  {% csrf_token %}
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Company Name&nbsp;<span style="color:red">*</span></label>
+                        <input type="text" name="company_name" placeholder="Visited Company name" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Purpose Of Visit&nbsp;<span style="color:red">*</span></label>
+                        <input type="text" name="purpose_of_visit" placeholder="Purpose Of Visit" class="form-control"  required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label">Assign Data Collector&nbsp;<span style="color:red">*</span></label>
+                          <select name="assign_data_collector" class="form-control">
+                              {% for user in user %}
+                                <option value="{{ user.user.username }}">{{ user.user.username }}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" >Country&nbsp;<span style="color:red">*</span></label>
+                          <select name="country" class="form-control">
+                              {% for c in  country %}
+                              <option value="{{ c.country_name }}">{{ c.country_name }}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+                    </div>
+                  </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" >Division&nbsp;<span style="color:red">*</span></label>
+                              <select name="division" class="form-control">
+                                  {% for d in division %}
+                                      <option value="{{ d.division_name }}">{{ d.division_name }}</option>
+                                  {% endfor %}
+                              </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" >District&nbsp;<span style="color:red">*</span></label>
+                              <select name="district" class="form-control">
+                                  {% for d in district %}
+                                      <option value="{{ d.district_name }}">{{ d.district_name }}</option>
+                                  {% endfor %}
+                              </select>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" >Sub District&nbsp;<span style="color:red">*</span></label>
+                              <select name="sub_district" class="form-control">
+                                  {% for subdistrict in subdistrict %}
+                                  <option value="{{ subdistrict.subdistrct_name }}">{{ subdistrict.subdistrct_name }}</option>
+                                  {% endfor %}
+                              </select>
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label">Area&nbsp;<span style="color:red">*</span></label>
+                            <input type="text" name="area" placeholder="Enter Address" class="form-control" required>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <button class="btn btn-primary float-right" type="submit">Submit</button>
+                    </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% include 'footer.html' %}
