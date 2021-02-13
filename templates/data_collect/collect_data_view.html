@@ -34,15 +34,61 @@
                 <div class="pl-lg-4 mt-2">
                   <div class="row">
                     <div class="col-lg-4">
-                         <img src="{{data.picture.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                         <img src="{{data.picture_visited_person.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
                     </div>
                     <div class="col-lg-4">
-                          <img src="{{data.picture.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
-                    </div>
-                    <div class="col-lg-4">
-                           <img src="{{data.picture.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                          <img src="{{data.picture_of_visiting_card.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
                     </div>
                     </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label h6" for="input-first-name">Rating : </label>
+                        {% if data.company_review == 1 %}
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% endif %}
+                        {% if data.company_review == 2 %}
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% endif %}
+                        {% if data.company_review == 3 %}
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        {% endif %}
+
+                        {% if data.company_review == 4 %}
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star"></span>
+                        {% endif %}
+
+                        {% if data.company_review == 5 %}
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star checked" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star" style="color:#f5bf42;"></span>
+                            <span class="fa fa-star" style="color:#f5bf42;"></span>
+                        {% endif %}
+
+
+                      </div>
+                    </div>
+                  </div>
+
+
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
@@ -57,6 +103,7 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
