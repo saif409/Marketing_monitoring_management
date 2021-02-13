@@ -10,6 +10,14 @@ ROLE_CHOICES = (
     (3, 'User'),
 )
 
+REVIEW_CHOICES = (
+    (1, 'Onestar'),
+    (2, 'Twostar'),
+    (3, 'Threestar'),
+    (4, 'fourstar'),
+    (5, 'fivestar'),
+)
+
 STATUS_CHOICES = (
     (1, 'Active'),
     (2, 'InActive'),
@@ -83,6 +91,7 @@ class CollectData(models.Model):
     package_name = models.CharField(max_length=200)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+    company_review = models.IntegerField(choices=REVIEW_CHOICES)
 
     def __str__(self):
         return self.visited_company_name
