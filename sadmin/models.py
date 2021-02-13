@@ -79,7 +79,7 @@ class SubDistrict(models.Model):
 
 
 class CollectData(models.Model):
-    data_collector = models.ForeignKey(User,null = True, on_delete=models.CASCADE)
+    data_collector = models.ForeignKey(User, null = True, on_delete=models.CASCADE)
     visited_company_name = models.CharField(max_length=200)
     contact_person_name = models.CharField(max_length=200)
     designation_of_contact_person = models.CharField(max_length=200)
