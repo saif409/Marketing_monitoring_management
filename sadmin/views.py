@@ -347,7 +347,7 @@ def remove_subdistrict(request, id):
 
 
 def notifications(request):
-    user_obj = Surveyor.objects.all()
+    user_obj = Surveyor.objects.all()[::-1]
     context = {
         "user": user_obj,
         'isact_notification': 'active',
