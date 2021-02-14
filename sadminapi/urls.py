@@ -18,5 +18,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('country/', views.CountryList.as_view()),
+    path('countries/', views.CountryList.as_view()),
+    path('divisions/', views.DivisionList.as_view()),
+    path('districts/', views.DistrictList.as_view()),
+    path('sub-districts/', views.SubDistrictList.as_view()),
 ]

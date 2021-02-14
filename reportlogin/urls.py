@@ -38,7 +38,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 
-    path('sadminapi/', include('sadminapi.urls')),
+    path('api/', include('sadminapi.urls')),
 ]
 
 if settings.DEBUG:
