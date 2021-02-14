@@ -1,4 +1,4 @@
-from sadmin.models import Country, Division, District, SubDistrict
+from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector
 from rest_framework import serializers
 
 
@@ -24,5 +24,13 @@ class SubDistrictSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubDistrict
         fields = ['sub_district_name']
+
+
+class AssignmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssignDataCollector
+        fields = ['company_name', 'purpose_of_visit', 'assign_by', 'created_at']
+
+
 
 

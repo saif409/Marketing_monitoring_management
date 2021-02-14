@@ -1,10 +1,12 @@
+from django.core.paginator import Paginator
 from rest_framework.views import APIView
 from rest_framework import permissions
 from reportloginapi.serializers import UserSerializer, GroupSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from sadmin.models import Country, Division, District, SubDistrict
-from sadminapi.serializers import CountrySerializer, DivisionSerializer, DistrictSerializer, SubDistrictSerializer
+from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector
+from sadminapi.serializers import CountrySerializer, DivisionSerializer, DistrictSerializer, SubDistrictSerializer, \
+    AssignmentSerializer
 
 
 class CountryList(APIView):
@@ -40,6 +42,15 @@ class SubDistrictList(APIView):
     def get(self, request):
         sub_districts = SubDistrict.objects.all()
         serializer = SubDistrictSerializer(sub_districts, many=True)
+        return Response(serializer.data)
+
+
+class AssignmentList(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        assignments = AssignDataCollector.objects.filter(assign_data_collector=self.request.user)[::-1]
+        serializer = AssignmentSerializer(assignments, many=True)
         return Response(serializer.data)
 
 
