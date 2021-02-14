@@ -42,11 +42,11 @@ urlpatterns = [
 
 
     path('notifications/', views.notifications, name="notifications"),
-    path('collecting-data-list/', views.collecting_data_list, name="collecting_data_list"),
-    path('data-collecting-form/', views.create_data_form, name="create_data_form"),
+    path('data-list/', views.collecting_data_list, name="collecting_data_list"),
+    path('create-collect-form/', views.create_data_form, name="create_data_form"),
     path('collect-data-view/<int:id>/', views.collect_data_view, name="collect_data_view"),
     path('collect_data_delete/<int:id>/', views.collect_data_delete, name="collect_data_delete"),
-    path('create-collect-form/', views.create_collect_form, name="create_collect_form"),
+    path('assign-data-collector/', views.create_collect_form, name="create_collect_form"),
     path('view-form/<int:id>/', views.view_form, name="view_form"),
     path('form_delete/<int:id>/', views.form_delete, name="form_delete"),
 
