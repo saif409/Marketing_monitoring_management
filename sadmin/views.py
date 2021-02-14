@@ -79,7 +79,7 @@ def create_collect_form(request):
         district_obj = request.POST.get("district")
         district = District.objects.get(district_name=district_obj)
         sub_district_obj = request.POST.get("sub_district")
-        sub_district = SubDistrict.objects.get(subdistrct_name=sub_district_obj)
+        sub_district = SubDistrict.objects.get(sub_district_name=sub_district_obj)
         collect_obj = AssignDataCollector(company_name=company_name, purpose_of_visit=purpose_of_visit,assign_data_collector=assign_data_collector,
                                           assign_by=assign_by, area=area, country=country, division=division,district=district,sub_district=sub_district)
         collect_obj.save()
@@ -118,7 +118,7 @@ def surveyor_list(request, filter):
         page = request.GET.get('page')
         get_page = paginator.get_page(page)
 
-        context ={
+        context = {
             "isact_surveyorlist": "active",
             "user": get_page
         }
@@ -309,8 +309,8 @@ def remove_district(reuquest, id):
 
 def add_sub_district(request):
     if request.method == "POST":
-        subdistrct_name = request.POST.get("sub_district")
-        user = SubDistrict(subdistrct_name=subdistrct_name)
+        sub_district_name = request.POST.get("sub_district")
+        user = SubDistrict(sub_district_name=sub_district_name)
         user.save()
         messages.success(request, "Sub District Added Successfully")
     get_subdistrct = SubDistrict.objects.all()[::-1]
@@ -331,7 +331,7 @@ def update_sub_district(request, id):
         'isact_location': 'active'
     }
     if request.method == "POST":
-        obj.subdistrct_name = request.POST.get("sub_district")
+        obj.sub_district_name = request.POST.get("sub_district")
         obj.save()
         messages.success(request, "Sub District Update Successfully")
         return redirect(add_sub_district)

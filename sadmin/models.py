@@ -72,10 +72,10 @@ class District(models.Model):
 
 
 class SubDistrict(models.Model):
-    subdistrct_name = models.CharField(max_length=100, null=True, blank=True)
+    sub_district_name = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.subdistrct_name
+        return self.sub_district_name
 
 
 class CollectData(models.Model):
