@@ -4,9 +4,9 @@ from rest_framework import permissions, status
 from reportloginapi.serializers import UserSerializer, GroupSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector
+from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector, CollectData
 from sadminapi.serializers import CountrySerializer, DivisionSerializer, DistrictSerializer, SubDistrictSerializer, \
-    AssignmentSerializer, DataCollectFormSerializer
+    AssignmentSerializer, DataCollectFormSerializer, DataListSerializer, DataDetailsSerializer
 
 
 class CountryList(APIView):
@@ -63,6 +63,24 @@ class DataCollectForm(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DataList(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        data_list = CollectData.objects.filter(data_collector=self.request.user)
+        serializer = DataListSerializer(data_list, many=True)
+        return Response(serializer.data)
+
+
+class DataDetails(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, id):
+        data_details = CollectData.objects.filter(id=id)
+        serializer = DataDetailsSerializer(data_details, many=True)
+        return Response(serializer.data)
 
 
 

@@ -92,7 +92,7 @@ class CollectData(models.Model):
     package_name = models.CharField(max_length=200)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    company_review = models.IntegerField(choices=REVIEW_CHOICES)
+    company_review = models.IntegerField(choices=REVIEW_CHOICES, null=True)
 
     def __str__(self):
         return self.visited_company_name
@@ -110,7 +110,6 @@ class AssignDataCollector(models.Model):
     area = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-
     def __str__(self):
         return self.company_name
 
@@ -120,6 +119,7 @@ class PurposeOfVisit(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class PackageName(models.Model):
     purpose_of_visit = models.ForeignKey(PurposeOfVisit, on_delete=models.CASCADE)
