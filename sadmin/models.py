@@ -113,3 +113,17 @@ class AssignDataCollector(models.Model):
 
     def __str__(self):
         return self.company_name
+
+
+class PurposeOfVisit(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class PackageName(models.Model):
+    purpose_of_visit = models.ForeignKey(PurposeOfVisit, on_delete=models.CASCADE)
+    package_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.package_name
