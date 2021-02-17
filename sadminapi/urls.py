@@ -26,4 +26,5 @@ urlpatterns = [
     path('create-data-form/', views.DataCollectForm.as_view()),
     path('data-list/', views.DataList.as_view()),
     path('data-details/<int:id>/', views.DataDetails.as_view()),
+    path('service-list/', views.ServiceList.as_view()),
 ]
