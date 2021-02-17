@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth import authenticate,login,logout
-from .models import Country, District, Division, SubDistrict, ServiceCategory
+from .models import Country, District, Division, SubDistrict, ServiceCategory, Package
 from django.contrib import messages
 from django.core.paginator import Paginator
 from.models import SubDistrict,Surveyor,Division,District,CollectData,AssignDataCollector
@@ -556,5 +556,60 @@ def delete_service_category(request, id):
     service_category_obj.delete()
     messages.success(request, "Service Category Removed Successfully")
     return redirect(add_service_category)
+
+
+def add_package(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            package = request.POST.get("package")
+            service_category_id = request.POST.get("service_category_id")
+            package_obj = Package(service_category_id=service_category_id, name=package)
+            package_obj.save()
+            messages.success(request, "Package Added Successfully")
+
+        service_category_list = ServiceCategory.objects.all()
+        package_list = Package.objects.all()[::-1]
+        context = {
+            'isact_package': 'active',
+            'package_list': package_list,
+            'service_category_list': service_category_list
+
+        }
+        return render(request, "add/add_package.html", context)
+    else:
+        return redirect('login')
+
+
+def update_package(request, id):
+    if request.user.is_authenticated:
+        service_category_list = ServiceCategory.objects.all()
+        package_obj = get_object_or_404(Package, id=id)
+
+        context = {
+            'service_category_list': service_category_list,
+            'package': package_obj,
+            'isact_package': 'active'
+        }
+
+        if request.method == "POST":
+            package_obj.service_category_id = request.POST.get("service_category_id")
+            package_obj.name = request.POST.get("package")
+            package_obj.save()
+            messages.success(request, "Package Updated Successfully")
+
+        return render(request, "update/update_package.html", context)
+    else:
+        return redirect('login')
+
+
+def delete_package(request, id):
+    package_obj = get_object_or_404(Package, id=id)
+    package_obj.delete()
+    messages.success(request, "Package Removed Successfully")
+    return redirect(add_package)
+
+
+
+
 
 

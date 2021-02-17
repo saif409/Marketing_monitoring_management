@@ -52,5 +52,8 @@ urlpatterns = [
     path('add-service-category/', views.add_service_category, name="add_service_category"),
     path('update-service-category/<int:id>/', views.update_service_category, name="update_service_category"),
     path('delete-service-category/<int:id>/', views.delete_service_category, name="delete_service_category"),
+    path('add-package/', views.add_package, name="add_package"),
+    path('update-package/<int:id>/', views.update_package, name="update_package"),
+    path('delete-package/<int:id>/', views.delete_package, name="delete_package"),
 
 ]
