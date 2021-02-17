@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib import admin
-from.models import Country,Division,District,SubDistrict,Surveyor,CollectData,AssignDataCollector,PurposeOfVisit,PackageName
+from.models import Country,Division,District,SubDistrict,Surveyor,CollectData,AssignDataCollector,ServiceCategory,Package
 
 # Register your models here.
 
@@ -11,5 +11,5 @@ admin.site.register(SubDistrict)
 admin.site.register(Surveyor)
 admin.site.register(CollectData)
 admin.site.register(AssignDataCollector)
-admin.site.register(PurposeOfVisit)
-admin.site.register(PackageName)
+admin.site.register(ServiceCategory)
+admin.site.register(Package)

@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth import authenticate,login,logout
-from.models import Country,District,Division,SubDistrict
+from .models import Country, District, Division, SubDistrict, ServiceCategory
 from django.contrib import messages
 from django.core.paginator import Paginator
 from.models import SubDistrict,Surveyor,Division,District,CollectData,AssignDataCollector
@@ -512,5 +512,49 @@ def remove_division(request, id):
     obj.delete()
     messages.success(request, "Division Removed Successfully")
     return redirect(add_division)
+
+
+def add_service_category(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            service_category = request.POST.get("service_category")
+            service_category_obj = ServiceCategory(name=service_category)
+            service_category_obj.save()
+            messages.success(request, "Service Category Added Successfully")
+
+        service_category_list = ServiceCategory.objects.all()[::-1]
+        context = {
+            'isact_service_category': 'active',
+            'service_category_list': service_category_list
+        }
+        return render(request, "add/add_service_category.html", context)
+    else:
+        return redirect('login')
+
+
+def update_service_category(request, id):
+    if request.user.is_authenticated:
+        service_category_obj = get_object_or_404(ServiceCategory, id=id)
+
+        context = {
+            "service_category": service_category_obj,
+            'isact_service_category': 'active'
+        }
+
+        if request.method == "POST":
+            service_category_obj.name = request.POST.get("service_category")
+            service_category_obj.save()
+            messages.success(request, "Service Category Updated Successfully")
+
+        return render(request, "update/update_service_category.html", context)
+    else:
+        return redirect('login')
+
+
+def delete_service_category(request, id):
+    service_category_obj = get_object_or_404(ServiceCategory, id=id)
+    service_category_obj.delete()
+    messages.success(request, "Service Category Removed Successfully")
+    return redirect(add_service_category)
 
 

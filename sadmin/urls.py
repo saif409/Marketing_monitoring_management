@@ -49,5 +49,8 @@ urlpatterns = [
     path('assign-data-collector/', views.create_collect_form, name="create_collect_form"),
     path('view-form/<int:id>/', views.view_form, name="view_form"),
     path('form_delete/<int:id>/', views.form_delete, name="form_delete"),
+    path('add-service-category/', views.add_service_category, name="add_service_category"),
+    path('update-service-category/<int:id>/', views.update_service_category, name="update_service_category"),
+    path('delete-service-category/<int:id>/', views.delete_service_category, name="delete_service_category"),
 
 ]
