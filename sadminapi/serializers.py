@@ -1,4 +1,4 @@
-from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector, CollectData, ServiceCategory
+from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector, CollectData, ServiceCategory, Package
 from rest_framework import serializers
 
 
@@ -62,5 +62,8 @@ class ServiceListSerializer(serializers.ModelSerializer):
         fields = ['name']
 
 
-
+class PackageListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Package
+        fields = ['name', 'service_category_id']
 

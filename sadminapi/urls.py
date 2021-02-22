@@ -27,4 +27,5 @@ urlpatterns = [
     path('data-list/', views.DataList.as_view()),
     path('data-details/<int:id>/', views.DataDetails.as_view()),
     path('service-list/', views.ServiceList.as_view()),
+    path('package-list/<int:id>/', views.PackageList.as_view()),
 ]

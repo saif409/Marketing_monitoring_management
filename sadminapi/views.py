@@ -4,9 +4,11 @@ from rest_framework import permissions, status
 from reportloginapi.serializers import UserSerializer, GroupSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector, CollectData, ServiceCategory
+from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector, CollectData, ServiceCategory, Package
 from sadminapi.serializers import CountrySerializer, DivisionSerializer, DistrictSerializer, SubDistrictSerializer, \
-    AssignmentSerializer, DataCollectFormSerializer, DataListSerializer, DataDetailsSerializer, ServiceListSerializer
+    AssignmentSerializer, DataCollectFormSerializer, DataListSerializer, DataDetailsSerializer, ServiceListSerializer, \
+    PackageListSerializer
+from django.shortcuts import get_object_or_404
 
 
 class CountryList(APIView):
@@ -89,6 +91,16 @@ class ServiceList(APIView):
     def get(self, request):
         service_list = ServiceCategory.objects.all()[::-1]
         serializer = ServiceListSerializer(service_list, many=True)
+        return Response(serializer.data)
+
+
+class PackageList(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, id):
+        # service_category_obj = get_object_or_404(ServiceCategory, id=id)
+        package_list = Package.objects.filter(service_category_id=id)
+        serializer = PackageListSerializer(package_list, many=True)
         return Response(serializer.data)
 
 

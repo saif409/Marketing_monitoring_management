@@ -122,7 +122,7 @@ class ServiceCategory(models.Model):
 
 
 class Package(models.Model):
-    service_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
+    service_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE, name='service_category')
     name = models.CharField(max_length=200)
 
     def __str__(self):
