@@ -77,7 +77,7 @@
                 </div>
                 <div class="container" style="margin-top:30px;">
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-flush" id="adminHome">
                             <thead class="widget style1 navy-bg">
                            <tr>
                                     <th>SL</th>
@@ -117,27 +117,27 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-footer py-4" style="margin-top:30px;">
-                      <nav aria-label="...">
-                         <div class="col-lg-offset-9">
-                            <div class="pagination">
-                                <span class="step-links">
-                                    {% if data.has_previous %}
-                                        <a href="?page=1">&laquo; first || </a>
-                                        <a href="?page={{ data.previous_page_number }}">previous</a>
-                                    {% endif %}
-                                    <span class="current">
-                                        Page {{ data.number }} of {{ data.paginator.num_pages }}.
-                                    </span>
-                                    {% if data.has_next %}
-                                        <a href="?page={{ data.next_page_number }}">next ||</a>
-                                        <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>
-                                    {% endif %}
-                                </span>
-                             </div>
-                          </div>
-                      </nav>
-                    </div>
+{#                <div class="card-footer py-4" style="margin-top:30px;">#}
+{#                      <nav aria-label="...">#}
+{#                         <div class="col-lg-offset-9">#}
+{#                            <div class="pagination">#}
+{#                                <span class="step-links">#}
+{#                                    {% if data.has_previous %}#}
+{#                                        <a href="?page=1">&laquo; first || </a>#}
+{#                                        <a href="?page={{ data.previous_page_number }}">previous</a>#}
+{#                                    {% endif %}#}
+{#                                    <span class="current">#}
+{#                                        Page {{ data.number }} of {{ data.paginator.num_pages }}.#}
+{#                                    </span>#}
+{#                                    {% if data.has_next %}#}
+{#                                        <a href="?page={{ data.next_page_number }}">next ||</a>#}
+{#                                        <a href="?page={{ data.paginator.num_pages }}">last &raquo;</a>#}
+{#                                    {% endif %}#}
+{#                                </span>#}
+{#                             </div>#}
+{#                          </div>#}
+{#                      </nav>#}
+{#                    </div>#}
 
             </div>
         </div>
@@ -146,7 +146,15 @@
 
 
 
-
-
-
 {% include 'footer.html' %}
+
+<script>
+    $(document).ready(function (){
+         $('#adminHome').DataTable(
+            { language: {
+                searchPlaceholder: "Search records",
+                search: "",
+              }
+        })
+    })
+</script>

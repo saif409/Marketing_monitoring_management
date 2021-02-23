@@ -78,7 +78,7 @@
         <div class="card-body">
 
             <div class="table-responsive">
-                <table class="table align-items-center table-flush">
+                <table class="table align-items-center table-flush" id="addPackage">
                     <thead class="thead-light">
                     <tr>
                         <th scope="col" class="sort" data-sort="SL NO">SN</th>
@@ -137,5 +137,13 @@
 
 {% include 'footer.html' %}
 
-
-
+<script>
+    $(document).ready(function (){
+         $('#addPackage').DataTable(
+            { language: {
+                searchPlaceholder: "Search records",
+                search: "",
+              }
+        })
+    })
+</script>
