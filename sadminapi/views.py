@@ -101,7 +101,3 @@ class PackageList(APIView):
         package_list = Package.objects.filter(service_category_id=id)
         serializer = PackageListSerializer(package_list, many=True)
         return Response(serializer.data)
-
-
-
-

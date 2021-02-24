@@ -69,7 +69,7 @@ def create_collect_form(request):
         }
         if request.method == "POST":
             company_name = request.POST.get("company_name")
-            purpose_of_visit = request.POST.get("purpose_of_visit")
+            service_category = request.POST.get("service_category")
             u_obj = request.POST.get("assign_data_collector")
             assign_data_collector=User.objects.get(username=u_obj)
             assign_by = request.user
@@ -82,7 +82,7 @@ def create_collect_form(request):
             district = District.objects.get(district_name=district_obj)
             sub_district_obj = request.POST.get("sub_district")
             sub_district = SubDistrict.objects.get(sub_district_name=sub_district_obj)
-            collect_obj = AssignDataCollector(company_name=company_name, purpose_of_visit=purpose_of_visit,assign_data_collector=assign_data_collector,
+            collect_obj = AssignDataCollector(company_name=company_name, service_category=service_category,assign_data_collector=assign_data_collector,
                                               assign_by=assign_by, area=area, country=country, division=division,district=district,sub_district=sub_district)
             collect_obj.save()
             messages.success(request, "Data Collector Assign Successfully")
@@ -423,16 +423,16 @@ def create_data_form(request):
             visited_company_name = request.POST.get("visited_company_name")
             contact_person_name = request.POST.get("contact_person_name")
             designation_of_contact_person = request.POST.get("designation_of_contact_person")
-            purpose_of_visit = request.POST.get("purpose_of_visit")
+            service_category = request.POST.get("service_category")
             contact_no = request.POST.get("contact_no")
             email = request.POST.get("email")
             address = request.POST.get("address")
             picture_visited_person = request.FILES.get("picture")
             package_name = request.POST.get("package_name")
             description = request.POST.get("description")
-            collector_obj = CollectData(data_collector=request.user,visited_company_name=visited_company_name,contact_person_name=contact_person_name,
-                                        designation_of_contact_person=designation_of_contact_person,purpose_of_visit=purpose_of_visit,contact_no=contact_no,
-                                        email=email,address=address,picture_visited_person=picture_visited_person,package_name=package_name,description=description)
+            collector_obj = CollectData(data_collector=request.user, visited_company_name=visited_company_name, contact_person_name=contact_person_name,
+                                        designation_of_contact_person=designation_of_contact_person, service_category=service_category, contact_no=contact_no,
+                                        email=email, address=address, picture_visited_person=picture_visited_person, package_name=package_name, description=description)
 
             collector_obj.save()
             messages.success(request, "Collect Data Store Successfully")

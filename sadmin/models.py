@@ -98,7 +98,7 @@ class CollectData(models.Model):
     visited_company_name = models.CharField(max_length=200)
     contact_person_name = models.CharField(max_length=200)
     designation_of_contact_person = models.CharField(max_length=200)
-    purpose_of_visit = models.OneToOneField(ServiceCategory, on_delete=models.DO_NOTHING)
+    service_category = models.OneToOneField(ServiceCategory, on_delete=models.DO_NOTHING)
     contact_no = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
@@ -115,7 +115,7 @@ class CollectData(models.Model):
 
 class AssignDataCollector(models.Model):
     company_name = models.CharField(max_length=200)
-    purpose_of_visit = models.CharField(max_length=200)
+    service_category = models.OneToOneField(ServiceCategory, on_delete=models.DO_NOTHING)
     assign_data_collector = models.ForeignKey(User, on_delete=models.CASCADE)
     assign_by = models.CharField(max_length=100)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)

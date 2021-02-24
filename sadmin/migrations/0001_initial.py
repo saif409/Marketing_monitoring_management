@@ -89,7 +89,7 @@ class Migration(migrations.Migration):
                 ('visited_company_name', models.CharField(max_length=200)),
                 ('contact_person_name', models.CharField(max_length=200)),
                 ('designation_of_contact_person', models.CharField(max_length=200)),
-                ('purpose_of_visit', models.CharField(max_length=200)),
+                ('service_category', models.CharField(max_length=200)),
                 ('contact_no', models.CharField(max_length=200)),
                 ('email', models.CharField(max_length=200)),
                 ('address', models.CharField(max_length=200)),
@@ -107,7 +107,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('company_name', models.CharField(max_length=200)),
-                ('purpose_of_visit', models.CharField(max_length=200)),
+                ('service_category', models.CharField(max_length=200)),
                 ('assign_by', models.CharField(max_length=100)),
                 ('area', models.CharField(max_length=100)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
