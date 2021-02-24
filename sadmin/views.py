@@ -38,15 +38,13 @@ def admin_home(request):
         total_data_collector = Surveyor.objects.all().count()
         total_data_collect = CollectData.objects.all().count()
         total_assign_data_collector = AssignDataCollector.objects.all().count()
-        paginator = Paginator(assign_collector_obj, 50)
-        page = request.GET.get('page')
-        get_page = paginator.get_page(page)
+
         context={
             "isact_home":"active",
             "total_data_collector":total_data_collector,
             "total_data_collect":total_data_collect,
             "total_assign_data_collector":total_assign_data_collector,
-            "data":get_page
+            "data": assign_collector_obj
         }
         return render(request, "admin_home.html", context)
     else:
@@ -126,13 +124,10 @@ def surveyor_list(request, filter):
             user_obj = Surveyor.objects.all().filter(status=2)[::-1]
         elif filter == 'rejected':
             user_obj = Surveyor.objects.all().filter(status=3)[::-1]
-        paginator = Paginator(user_obj, 50)
-        page = request.GET.get('page')
-        get_page = paginator.get_page(page)
 
         context ={
             "isact_surveyorlist": "active",
-            "user": get_page
+            "user": user_obj
         }
         return render(request, "surveyor/surveyor_list.html", context)
     else:
@@ -253,11 +248,8 @@ def country(request):
             messages.success(request, "Country Added Successfully")
 
         get_country = Country.objects.all()[::-1]
-        paginator = Paginator(get_country, 10)
-        page = request.GET.get('page')
-        get_page = paginator.get_page(page)
         context = {
-            "get_country": get_page,
+            "get_country": get_country,
             'isact_location': 'active',
         }
         return render(request, "add/add_country.html", context)
@@ -412,12 +404,9 @@ def notifications(request):
 def collecting_data_list(request):
     if request.user.is_authenticated:
         data = CollectData.objects.all()[::-1]
-        paginator = Paginator(data,1)
-        page = request.GET.get('page')
-        get_page = paginator.get_page(page)
 
         context={
-            "data":get_page,
+            "data": data,
             "isact_datacollectlist":"active"
         }
         return render(request, "data_collect/data_collection_list.html", context)
