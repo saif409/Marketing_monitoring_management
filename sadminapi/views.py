@@ -98,7 +98,6 @@ class PackageList(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, id):
-        # service_category_obj = get_object_or_404(ServiceCategory, id=id)
         package_list = Package.objects.filter(service_category_id=id)
         serializer = PackageListSerializer(package_list, many=True)
         return Response(serializer.data)

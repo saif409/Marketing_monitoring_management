@@ -78,18 +78,33 @@ class SubDistrict(models.Model):
         return self.sub_district_name
 
 
+class ServiceCategory(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
+class Package(models.Model):
+    service_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE, name='service_category')
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
 class CollectData(models.Model):
     data_collector = models.ForeignKey(User, null = True, on_delete=models.CASCADE)
     visited_company_name = models.CharField(max_length=200)
     contact_person_name = models.CharField(max_length=200)
     designation_of_contact_person = models.CharField(max_length=200)
-    purpose_of_visit = models.CharField(max_length=200)
+    purpose_of_visit = models.OneToOneField(ServiceCategory, on_delete=models.DO_NOTHING)
     contact_no = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     picture_visited_person = models.FileField()
     picture_of_visiting_card = models.FileField(null=True)
-    package_name = models.CharField(max_length=200)
+    package_name = models.OneToOneField(Package, on_delete=models.DO_NOTHING)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     company_review = models.IntegerField(choices=REVIEW_CHOICES, null=True)
@@ -114,16 +129,3 @@ class AssignDataCollector(models.Model):
         return self.company_name
 
 
-class ServiceCategory(models.Model):
-    name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
-
-
-class Package(models.Model):
-    service_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE, name='service_category')
-    name = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
