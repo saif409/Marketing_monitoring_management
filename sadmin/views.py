@@ -69,7 +69,7 @@ def create_collect_form(request):
         }
         if request.method == "POST":
             company_name = request.POST.get("company_name")
-            purpose_of_visit = request.POST.get("purpose_of_visit")
+            purpose_of_visit = request.POST.get("service_category")
             u_obj = request.POST.get("assign_data_collector")
             assign_data_collector=User.objects.get(username=u_obj)
             assign_by = request.user
@@ -423,7 +423,7 @@ def create_data_form(request):
             visited_company_name = request.POST.get("visited_company_name")
             contact_person_name = request.POST.get("contact_person_name")
             designation_of_contact_person = request.POST.get("designation_of_contact_person")
-            purpose_of_visit = request.POST.get("purpose_of_visit")
+            purpose_of_visit = request.POST.get("service_category")
             contact_no = request.POST.get("contact_no")
             email = request.POST.get("email")
             address = request.POST.get("address")
