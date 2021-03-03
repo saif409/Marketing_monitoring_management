@@ -22,7 +22,7 @@ urlpatterns = [
     path('divisions/', views.DivisionList.as_view()),
     path('districts/', views.DistrictList.as_view()),
     path('sub-districts/', views.SubDistrictList.as_view()),
-    path('assignment-list/', views.AssignmentList.as_view()),
+    path('notifications/', views.AssignmentList.as_view()),
     path('submit-data/', views.DataCollectForm.as_view()),
     path('data-list/', views.DataList.as_view()),
     path('data-details/<int:id>/', views.DataDetails.as_view()),
