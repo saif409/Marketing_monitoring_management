@@ -17,7 +17,24 @@ class CountryList(APIView):
     def get(self, request):
         countries = Country.objects.all()
         serializer = CountrySerializer(countries, many=True)
-        return Response(serializer.data)
+
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
 
 class DivisionList(APIView):
@@ -26,7 +43,24 @@ class DivisionList(APIView):
     def get(self, request):
         divisions = Division.objects.all()
         serializer = DivisionSerializer(divisions, many=True)
-        return Response(serializer.data)
+
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
 
 class DistrictList(APIView):
@@ -35,8 +69,24 @@ class DistrictList(APIView):
     def get(self, request):
         districts = District.objects.all()
         serializer = DistrictSerializer(districts, many=True)
-        return Response(serializer.data)
 
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
 class SubDistrictList(APIView):
     permission_classes = (IsAuthenticated,)
@@ -44,7 +94,24 @@ class SubDistrictList(APIView):
     def get(self, request):
         sub_districts = SubDistrict.objects.all()
         serializer = SubDistrictSerializer(sub_districts, many=True)
-        return Response(serializer.data)
+
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
 
 class AssignmentList(APIView):
@@ -53,18 +120,45 @@ class AssignmentList(APIView):
     def get(self, request):
         assignments = AssignDataCollector.objects.filter(assign_data_collector=self.request.user)[::-1]
         serializer = AssignmentSerializer(assignments, many=True)
-        return Response(serializer.data)
+
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
 
 class DataCollectForm(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request, format=None):
+    def post(self, request):
         serializer = DataCollectFormSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            response = {
+                'status_code': status.HTTP_201_CREATED,
+                'message': 'Successfully created',
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_201_CREATED)
+
+        response = {
+            'status_code': status.HTTP_400_BAD_REQUEST,
+            'message': serializer.errors,
+            'user_id': self.request.user.id
+        }
+        return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DataList(APIView):
@@ -73,7 +167,24 @@ class DataList(APIView):
     def get(self, request):
         data_list = CollectData.objects.filter(data_collector=self.request.user)
         serializer = DataListSerializer(data_list, many=True)
-        return Response(serializer.data)
+
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
 
 class DataDetails(APIView):
@@ -82,7 +193,24 @@ class DataDetails(APIView):
     def get(self, request, id):
         data_details = CollectData.objects.filter(id=id)
         serializer = DataDetailsSerializer(data_details, many=True)
-        return Response(serializer.data)
+
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
 
 class ServiceList(APIView):
@@ -91,7 +219,24 @@ class ServiceList(APIView):
     def get(self, request):
         service_list = ServiceCategory.objects.all()[::-1]
         serializer = ServiceListSerializer(service_list, many=True)
-        return Response(serializer.data)
+
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
 
 
 class PackageList(APIView):
@@ -100,4 +245,21 @@ class PackageList(APIView):
     def get(self, request, id):
         package_list = Package.objects.filter(service_category_id=id)
         serializer = PackageListSerializer(package_list, many=True)
-        return Response(serializer.data)
+
+        if serializer.data:
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': serializer.data,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+        else:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': 'Empty List',
+                'data': [],
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)

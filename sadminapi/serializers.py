@@ -59,11 +59,11 @@ class DataDetailsSerializer(serializers.ModelSerializer):
 class ServiceListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ServiceCategory
-        fields = ['name']
+        fields = ['name', 'id']
 
 
 class PackageListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Package
-        fields = ['name', 'service_category_id']
+        fields = ['name', 'id', 'service_category_id']
 
