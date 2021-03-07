@@ -159,22 +159,48 @@ class DataCollectForm(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
-        serializer = DataCollectFormSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
+        # serializer = DataCollectFormSerializer(data=request.data)
+
+        try:
+            visited_company_name = request.data.get("visited_company_name")
+            contact_person_name = request.data.get("contact_person_name")
+            designation_of_contact_person = request.data.get("designation_of_contact_person")
+            service_category = request.data.get("service_category")
+            service_category_obj = ServiceCategory.objects.get(id=service_category)
+            package_name = request.data.get("package_name")
+            package_name_obj = Package.objects.get(id=package_name)
+            contact_no = request.data.get("contact_no")
+            email = request.data.get("email")
+            address = request.data.get("address")
+            picture_visited_person = request.FILES.get("picture_visited_person")
+            picture_of_visiting_card = request.FILES.get("picture_of_visiting_card")
+            description = request.data.get("description")
+            collector_obj = CollectData(data_collector=request.user, visited_company_name=visited_company_name,
+                                        contact_person_name=contact_person_name,
+                                        designation_of_contact_person=designation_of_contact_person,
+                                        service_category=service_category_obj, contact_no=contact_no,
+                                        email=email, address=address, picture_visited_person=picture_visited_person,
+                                        picture_of_visiting_card=picture_of_visiting_card,
+                                        package_name=package_name_obj, description=description)
+
+            collector_obj.save()
+
             response = {
                 'status_code': status.HTTP_201_CREATED,
                 'message': 'Successfully created',
                 'user_id': self.request.user.id
             }
             return Response(response, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            response = {
+                'status_code': status.HTTP_400_BAD_REQUEST,
+                'message': str(e),
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-        response = {
-            'status_code': status.HTTP_400_BAD_REQUEST,
-            'message': serializer.errors,
-            'user_id': self.request.user.id
-        }
-        return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 class DataList(APIView):
