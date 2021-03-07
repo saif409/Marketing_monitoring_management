@@ -111,7 +111,7 @@ class Migration(migrations.Migration):
                 ('assign_by', models.CharField(max_length=100)),
                 ('area', models.CharField(max_length=100)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('assign_data_collector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('data_collector', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
                 ('country', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sadmin.country')),
                 ('district', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sadmin.district')),
                 ('division', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sadmin.division')),

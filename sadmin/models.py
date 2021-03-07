@@ -116,12 +116,12 @@ class CollectData(models.Model):
 class AssignDataCollector(models.Model):
     company_name = models.CharField(max_length=200)
     service_category = models.OneToOneField(ServiceCategory, on_delete=models.DO_NOTHING)
-    assign_data_collector = models.ForeignKey(User, on_delete=models.CASCADE)
+    data_collector = models.OneToOneField(Surveyor, on_delete=models.DO_NOTHING)
     assign_by = models.CharField(max_length=100)
-    country = models.ForeignKey(Country, on_delete=models.CASCADE)
-    division = models.ForeignKey(Division, on_delete=models.CASCADE)
-    district = models.ForeignKey(District, on_delete=models.CASCADE)
-    sub_district = models.ForeignKey(SubDistrict, on_delete=models.CASCADE)
+    country = models.OneToOneField(Country, on_delete=models.DO_NOTHING)
+    division = models.OneToOneField(Division, on_delete=models.DO_NOTHING)
+    district = models.OneToOneField(District, on_delete=models.DO_NOTHING)
+    sub_district = models.OneToOneField(SubDistrict, on_delete=models.DO_NOTHING)
     area = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 

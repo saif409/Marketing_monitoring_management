@@ -94,11 +94,11 @@
                                 <td><a href="" class="h6">{{ data.company_name }}</a> <br/>
                                     <small style="color:#fff;background-color:#e8583f;border-radius: 10px;padding-left:5px;padding-right:5px;">{{ data.created_at }}</small>
                                 </td>
-                                <td>{{ data.service_category }}<br/>
+                                <td>{{ data.service_category.name }}<br/>
                                     <small>{{ data.address }}</small>
 
                                 </td>
-                                <td>{{ data.assign_data_collector.username }}<br/>
+                                <td>{{ data.data_collector.user.username }}<br/>
                                     <small>Assign By {{ data.assign_by }}</small>
                                 </td>
                                 <td>

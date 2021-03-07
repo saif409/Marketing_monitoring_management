@@ -132,7 +132,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
 MEDIA_URL = '/images/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "survey_app/static/images")
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static/images")
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -142,3 +142,5 @@ EMAIL_HOST_PASSWORD = 'Oxdora1234' #past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+APPEND_SLASH = False

@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='assigndatacollector',
-            name='assign_data_collector',
+            name='data_collector',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sadmin.surveyor'),
         ),
     ]

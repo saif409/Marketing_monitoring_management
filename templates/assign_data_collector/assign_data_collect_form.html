@@ -37,8 +37,14 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" >Purpose Of Visit&nbsp;<span style="color:red">*</span></label>
-                        <input type="text" name="service_category" placeholder="Service Category of Visit" class="form-control" required>
+                        <label class="form-control-label" >Service Category Of Visit&nbsp;<span style="color:red">*</span></label>
+{#                        <input type="text" name="service_category" placeholder="Service Category of Visit" class="form-control" required>#}
+                          <select name="service_category" class="form-control" required>
+                              <option value="">---</option>
+                              {% for service_category in service_categories %}
+                                <option value="{{ service_category.name }}">{{ service_category.name }}</option>
+                              {% endfor %}
+                          </select>
                       </div>
                     </div>
                   </div>
@@ -46,9 +52,10 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label">Assign Data Collector&nbsp;<span style="color:red">*</span></label>
-                          <select name="assign_data_collector" class="form-control">
-                              {% for user in user %}
-                                <option value="{{ user.user.username }}">{{ user.user.username }}</option>
+                          <select name="data_collector" class="form-control" required>
+                              <option value="">---</option>
+                              {% for surveyor in surveyors %}
+                                <option value="{{ surveyor.id }}">{{ surveyor.user.username }}</option>
                               {% endfor %}
                           </select>
                       </div>
@@ -56,7 +63,8 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" >Country&nbsp;<span style="color:red">*</span></label>
-                          <select name="country" class="form-control">
+                          <select name="country" class="form-control" required>
+                              <option value="">---</option>
                               {% for c in  country %}
                               <option value="{{ c.country_name }}">{{ c.country_name }}</option>
                               {% endfor %}
@@ -69,7 +77,8 @@
                         <div class="col-lg-6">
                           <div class="form-group">
                             <label class="form-control-label" >Division&nbsp;<span style="color:red">*</span></label>
-                              <select name="division" class="form-control">
+                              <select name="division" class="form-control" required>
+                                  <option value="">---</option>
                                   {% for d in division %}
                                       <option value="{{ d.division_name }}">{{ d.division_name }}</option>
                                   {% endfor %}
@@ -79,7 +88,8 @@
                         <div class="col-lg-6">
                           <div class="form-group">
                             <label class="form-control-label" >District&nbsp;<span style="color:red">*</span></label>
-                              <select name="district" class="form-control">
+                              <select name="district" class="form-control" required>
+                                  <option value="">---</option>
                                   {% for d in district %}
                                       <option value="{{ d.district_name }}">{{ d.district_name }}</option>
                                   {% endfor %}
@@ -91,7 +101,8 @@
                         <div class="col-lg-6">
                           <div class="form-group">
                             <label class="form-control-label" >Sub District&nbsp;<span style="color:red">*</span></label>
-                              <select name="sub_district" class="form-control">
+                              <select name="sub_district" class="form-control" required>
+                                  <option value="">---</option>
                                   {% for subdistrict in subdistrict %}
                                   <option value="{{ subdistrict.sub_district_name }}">{{ subdistrict.sub_district_name }}</option>
                                   {% endfor %}

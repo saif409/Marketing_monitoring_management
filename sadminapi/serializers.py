@@ -68,3 +68,11 @@ class PackageListSerializer(serializers.ModelSerializer):
         model = Package
         fields = ['name', 'id', 'service_category_id']
 
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Surveyor
+        fields = ['address', 'profile_picture', 'country', 'division', 'district', 'sub_district', 'email',
+                  'graduation_subject', 'university', 'skills', 'area', 'phone', 'description', 'designation',
+                  'experience', 'role', 'created_at', 'status']
+
