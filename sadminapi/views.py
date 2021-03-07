@@ -178,10 +178,10 @@ class DataCollectForm(APIView):
             collector_obj = CollectData(data_collector=request.user, visited_company_name=visited_company_name,
                                         contact_person_name=contact_person_name,
                                         designation_of_contact_person=designation_of_contact_person,
-                                        service_category=service_category_obj, contact_no=contact_no,
-                                        email=email, address=address, picture_visited_person=picture_visited_person,
-                                        picture_of_visiting_card=picture_of_visiting_card,
-                                        package_name=package_name_obj, description=description)
+                                        service_category_id=service_category, package_name_id=package_name,
+                                        contact_no=contact_no, email=email, address=address,
+                                        picture_visited_person=picture_visited_person,
+                                        picture_of_visiting_card=picture_of_visiting_card, description=description)
 
             collector_obj.save()
 
