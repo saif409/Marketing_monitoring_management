@@ -1,4 +1,5 @@
-from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector, CollectData, ServiceCategory, Package
+from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector, CollectData, ServiceCategory, \
+    Package, Surveyor
 from rest_framework import serializers
 
 
@@ -29,7 +30,7 @@ class SubDistrictSerializer(serializers.ModelSerializer):
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = AssignDataCollector
-        fields = ['company_name', 'service_category', 'assign_by', 'created_at']
+        fields = ['company_name', 'service_category', 'assign_by', 'created_at', 'area']
 
 
 class DataCollectFormSerializer(serializers.ModelSerializer):
