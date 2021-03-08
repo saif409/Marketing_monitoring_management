@@ -107,7 +107,7 @@ class CollectData(models.Model):
     picture_of_visiting_card = models.FileField(null=True)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    company_review = models.IntegerField(choices=REVIEW_CHOICES, default=1)
+    company_review = models.IntegerField(choices=REVIEW_CHOICES)
 
     def __str__(self):
         return self.visited_company_name
