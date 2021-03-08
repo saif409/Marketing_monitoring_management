@@ -30,5 +30,5 @@ urlpatterns = [
     path('package-list/<int:id>/', views.PackageList.as_view()),
     path('user-details/', views.UserDetails.as_view()),
     path('all-summary/', views.AllSummary.as_view()),
-    path('collection-data/<str:date>', views.AllSummary.as_view()),
+    path('collection-data/<str:date>', views.CollectionDataByDate.as_view()),
 ]
