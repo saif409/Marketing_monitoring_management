@@ -559,7 +559,7 @@ def add_package(request):
             messages.success(request, "Package Added Successfully")
 
         service_category_list = ServiceCategory.objects.all()
-        package_list = Package.objects.all()[::-1]
+        package_list = Package.objects.all()
         context = {
             'isact_package': 'active',
             'package_list': package_list,

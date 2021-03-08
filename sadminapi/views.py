@@ -384,13 +384,9 @@ class CollectionDataByDate(APIView):
 
     def get(self, request, date):
         try:
-            day = datetime.strptime(date, '%d')
-            month = datetime.strptime(date, '%m')
-            year = datetime.strptime(date, '%Y')
-
-            total_collected_data = CollectData.objects.filter(created_at__day=day, created_at__month=month,
-                                                              created_at__year=year).count()
-
+            filter_date = datetime.strptime(date, '%Y-%m-%d')
+            total_collected_data = CollectData.objects.filter(created_at__day=filter_date.day, created_at__month=filter_date.month,
+                                                              created_at__year=filter_date.year).count()
             data_dict = {
                 'date': date,
                 'total_collected_data': total_collected_data
