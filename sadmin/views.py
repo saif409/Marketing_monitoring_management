@@ -188,7 +188,7 @@ def update_surveyor(request, id):
 
 
 def remove_surveyor(request, id):
-    obj = get_object_or_404(User, id=id)
+    obj = get_object_or_404(Surveyor, id=id)
     obj.delete()
     messages.success(request, "Requested User Delete Successfully !!")
     return redirect('surveyor_list', 'None')
