@@ -176,13 +176,15 @@ class DataCollectForm(APIView):
             picture_visited_person = request.FILES.get("picture_visited_person")
             picture_of_visiting_card = request.FILES.get("picture_of_visiting_card")
             description = request.data.get("description")
+            company_review = request.data.get('company_review')
             collector_obj = CollectData(data_collector=request.user, visited_company_name=visited_company_name,
                                         contact_person_name=contact_person_name,
                                         designation_of_contact_person=designation_of_contact_person,
                                         service_category_id=service_category, package_name_id=package_name,
                                         contact_no=contact_no, email=email, address=address,
                                         picture_visited_person=picture_visited_person,
-                                        picture_of_visiting_card=picture_of_visiting_card, description=description)
+                                        picture_of_visiting_card=picture_of_visiting_card, description=description,
+                                        company_review=company_review)
 
             collector_obj.save()
 
