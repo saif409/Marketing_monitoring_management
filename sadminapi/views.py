@@ -10,6 +10,7 @@ from sadminapi.serializers import CountrySerializer, DivisionSerializer, Distric
     AssignmentSerializer, DataCollectFormSerializer, DataListSerializer, DataDetailsSerializer, ServiceListSerializer, \
     PackageListSerializer, UserDetailsSerializer
 from django.shortcuts import get_object_or_404
+from datetime import datetime
 
 
 class CountryList(APIView):
@@ -376,3 +377,40 @@ class AllSummary(APIView):
             }
 
             return Response(response, status=status.HTTP_404_NOT_FOUND)
+
+
+class CollectionDataByDate(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, date):
+        try:
+            filter_date = datetime.strptime(date, '%Y-%m-%d')
+
+            total_collected_data = CollectData.objects.filter(created_at=filter_date).count()
+
+            data_dict = {
+                'date': date,
+                'total_collected_data': total_collected_data
+            }
+
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': data_dict,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': str(e),
+                'data': [],
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
+
+
+
