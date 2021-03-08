@@ -11,11 +11,11 @@ ROLE_CHOICES = (
 )
 
 REVIEW_CHOICES = (
-    (1, 'Onestar'),
-    (2, 'Twostar'),
-    (3, 'Threestar'),
-    (4, 'fourstar'),
-    (5, 'fivestar'),
+    (1, 'OneStar'),
+    (2, 'TwoStar'),
+    (3, 'ThreeStar'),
+    (4, 'FourStar'),
+    (5, 'FiveStar'),
 )
 
 STATUS_CHOICES = (
@@ -94,7 +94,7 @@ class Package(models.Model):
 
 
 class CollectData(models.Model):
-    data_collector = models.ForeignKey(User, null = True, on_delete=models.CASCADE)
+    data_collector = models.ForeignKey(User, on_delete=models.CASCADE)
     visited_company_name = models.CharField(max_length=200)
     contact_person_name = models.CharField(max_length=200)
     designation_of_contact_person = models.CharField(max_length=200)
@@ -107,7 +107,7 @@ class CollectData(models.Model):
     picture_of_visiting_card = models.FileField(null=True)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
-    company_review = models.IntegerField(choices=REVIEW_CHOICES, null=True)
+    company_review = models.IntegerField(choices=REVIEW_CHOICES, default=1)
 
     def __str__(self):
         return self.visited_company_name

@@ -385,29 +385,27 @@ class CollectionDataByDate(APIView):
             data_list_date = CollectData.objects.filter(created_at__day=filter_date.day,
                                                         created_at__month=filter_date.month,
                                                         created_at__year=filter_date.year)
-            # data_dict = {
-            #     'date': date,
-            #     'total_collected_data': total_collected_data
-            # }
 
-            serializer = DataListSerializer(data_list_date, many=True)
-
-            if serializer.data:
-                response = {
-                    'status_code': status.HTTP_200_OK,
-                    'message': 'Success',
-                    'data': serializer.data,
-                    'user_id': self.request.user.id
-                }
-            else:
-                response = {
-                    'status_code': status.HTTP_404_NOT_FOUND,
-                    'message': serializer.error_messages,
-                    'data': [],
-                    'user_id': self.request.user.id
+            data_list = list()
+            for data in data_list_date:
+                data_dict = {
+                    'data_collector_username': data.data_collector.username,
+                    'data_collector_name': data.data_collector.first_name + ' ' + data.data_collector.last_name,
+                    'company_name': data.visited_company_name,
+                    'address': data.address,
+                    'created_at': data.created_at,
+                    'company_review': data.company_review
                 }
 
-            return Response(response, status=response.get('status_code'))
+                data_list.append(data_dict)
+
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': data_list,
+                'user_id': self.request.user.id
+            }
+            return Response(response, status=status.HTTP_200_OK)
 
         except Exception as e:
             response = {
