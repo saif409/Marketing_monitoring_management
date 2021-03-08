@@ -5,7 +5,7 @@ from reportloginapi.serializers import UserSerializer, GroupSerializer
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from sadmin.models import Country, Division, District, SubDistrict, AssignDataCollector, CollectData, ServiceCategory, \
-    Package, Surveyor
+    Package, Surveyor, STATUS_CHOICES
 from sadminapi.serializers import CountrySerializer, DivisionSerializer, DistrictSerializer, SubDistrictSerializer, \
     AssignmentSerializer, DataCollectFormSerializer, DataListSerializer, DataDetailsSerializer, ServiceListSerializer, \
     PackageListSerializer, UserDetailsSerializer
@@ -344,4 +344,35 @@ class UserDetails(APIView):
                 'data': [],
                 'user_id': self.request.user.id
             }
+            return Response(response, status=status.HTTP_404_NOT_FOUND)
+
+
+class AllSummary(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        try:
+            data_dict = {
+                'total_registered_agent': Surveyor.objects.count(),
+                'total_active_agent': Surveyor.objects.filter(status=STATUS_CHOICES[0].index('Active')),
+                'total_collected_data': CollectData.objects.count()
+            }
+
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Success',
+                'data': data_dict,
+                'user_id': self.request.user.id
+            }
+
+            return Response(response, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            response = {
+                'status_code': status.HTTP_404_NOT_FOUND,
+                'message': str(e),
+                'data': [],
+                'user_id': self.request.user.id
+            }
+
             return Response(response, status=status.HTTP_404_NOT_FOUND)
