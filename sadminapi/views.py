@@ -201,9 +201,6 @@ class DataCollectForm(APIView):
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
-
 class DataList(APIView):
     permission_classes = (IsAuthenticated,)
 
@@ -385,21 +382,32 @@ class CollectionDataByDate(APIView):
     def get(self, request, date):
         try:
             filter_date = datetime.strptime(date, '%Y-%m-%d')
-            total_collected_data = CollectData.objects.filter(created_at__day=filter_date.day, created_at__month=filter_date.month,
-                                                              created_at__year=filter_date.year).count()
-            data_dict = {
-                'date': date,
-                'total_collected_data': total_collected_data
-            }
+            data_list_date = CollectData.objects.filter(created_at__day=filter_date.day,
+                                                        created_at__month=filter_date.month,
+                                                        created_at__year=filter_date.year)
+            # data_dict = {
+            #     'date': date,
+            #     'total_collected_data': total_collected_data
+            # }
 
-            response = {
-                'status_code': status.HTTP_200_OK,
-                'message': 'Success',
-                'data': data_dict,
-                'user_id': self.request.user.id
-            }
+            serializer = DataListSerializer(data_list_date, many=True)
 
-            return Response(response, status=status.HTTP_200_OK)
+            if serializer.data:
+                response = {
+                    'status_code': status.HTTP_200_OK,
+                    'message': 'Success',
+                    'data': serializer.data,
+                    'user_id': self.request.user.id
+                }
+            else:
+                response = {
+                    'status_code': status.HTTP_404_NOT_FOUND,
+                    'message': serializer.error_messages,
+                    'data': [],
+                    'user_id': self.request.user.id
+                }
+
+            return Response(response, status=response.get('status_code'))
 
         except Exception as e:
             response = {
