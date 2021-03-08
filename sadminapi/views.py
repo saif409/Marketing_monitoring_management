@@ -355,7 +355,7 @@ class AllSummary(APIView):
         try:
             data_dict = {
                 'total_registered_agent': Surveyor.objects.count(),
-                'total_active_agent': Surveyor.objects.filter(status=STATUS_CHOICES[0].index('Active')),
+                'total_active_agent': Surveyor.objects.filter(status=STATUS_CHOICES[0].index('Active')).count(),
                 'total_collected_data': CollectData.objects.count()
             }
 
