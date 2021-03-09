@@ -64,7 +64,12 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" >Service Category Of Visit <span style="color:red">*</span></label>
-                        <input type="text" name="service_category" placeholder="Enter Service Category of Visit" class="form-control" value="{{ data.service_category.name }}" required>
+                          <select name="service_category_id" class="form-control" required>
+                              <option value="">---</option>
+                              {% for service_category in service_category_list %}
+                                <option value="{{ service_category.id }}">{{ service_category.name }}</option>
+                              {% endfor %}
+                          </select>
                       </div>
                     </div>
                   </div>
@@ -86,7 +91,12 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" >Package Name <span style="color:red">*</span></label>
-                        <input type="text" name="package_name" placeholder="Enter Package name" class="form-control" value="{{ data.package_name}}" required>
+                        <select name="package_name_id" class="form-control" required>
+                              <option value="">---</option>
+                              {% for package in package_list %}
+                                <option value="{{ package.id }}">{{ package.name }}</option>
+                              {% endfor %}
+                        </select>
                       </div>
                     </div>
                     <div class="col-lg-6">
