@@ -1,10 +1,6 @@
 {% include 'header.html' %}
 {% load static %}
 
-
-
-
-
  <div class="main-content" id="panel" style="margin-top:10px;">
      {% if messages %}
         <div class="messages" style="margin:20px;">
@@ -28,6 +24,19 @@
               </div>
             </div>
 
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+              <!-- The Close Button -->
+              <span class="close">&times;</span>
+
+              <!-- Modal Content (The Image) -->
+              <img class="modal-content" id="img01">
+
+              <!-- Modal Caption (Image Text) -->
+              <div id="caption"></div>
+            </div>
+
             <div class="card-body">
                <button class="btn btn-primary">Collecting information by {{ data.data_collector }}</button>
               <form method="POST">
@@ -35,16 +44,16 @@
                   <div class="row">
                     <div class="col-lg-4">
                         {% if data.picture_visited_person %}
-                            <img src="{{data.picture_visited_person.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                            <img id="myImg1" src="{{data.picture_visited_person.url}}" alt="Visited Person" class="rounded mx-auto d-block border border-primary mb-5 zoom" style="width:100%;max-width:300px;">
                         {% else %}
-                            <img src="{% static 'img/default.png' %}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                            <img src="{% static 'img/default.png' %}" class="rounded mx-auto d-block border border-primary mb-5 zoom" style="width:100%;max-width:300px;">
                         {% endif %}
                     </div>
                     <div class="col-lg-4">
                         {% if data.picture_of_visiting_card %}
-                            <img src="{{data.picture_of_visiting_card.url}}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                            <img id="myImg2" src="{{data.picture_of_visiting_card.url}}" alt="Visiting Card" class="rounded mx-auto d-block border border-primary mb-5 zoom" style="width:100%;max-width:300px;">
                         {% else %}
-                            <img src="{% static 'img/default.png' %}" class="rounded mx-auto d-block border border-primary mb-5" style="height:150px;width:300px;">
+                            <img src="{% static 'img/default.png' %}" class="rounded mx-auto d-block border border-primary mb-5 zoom" style="width:100%;max-width:300px;">
                         {% endif %}
                     </div>
                     </div>
