@@ -9628,7 +9628,7 @@ body.md-skin {
 }
 
 /* The Close Button */
-.close {
+.close-button {
   position: absolute;
   top: 15px;
   right: 35px;
@@ -9638,8 +9638,8 @@ body.md-skin {
   transition: 0.3s;
 }
 
-.close:hover,
-.close:focus {
+.close-button:hover,
+.close-button:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
