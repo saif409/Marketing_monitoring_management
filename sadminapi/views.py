@@ -238,6 +238,19 @@ class DataDetails(APIView):
 
         data_list = list()
         for data in data_details:
+            picture_visited_person = None
+            picture_of_visiting_card = None
+
+            try:
+                picture_visited_person = data.picture_visited_person.url
+            except ValueError:
+                picture_visited_person = None
+
+            try:
+                picture_of_visiting_card = data.picture_of_visiting_card.url
+            except ValueError:
+                picture_of_visiting_card = None
+
             data_dict = dict({"id": 1,
                               "data_collector": data.data_collector.id,
                               "visited_company_name": data.visited_company_name,
@@ -250,8 +263,8 @@ class DataDetails(APIView):
                               "contact_no": data.contact_no,
                               "email": data.email,
                               "address": data.address,
-                              "picture_visited_person":  data.picture_visited_person.url if hasattr(data, 'picture_visited_person') else None,
-                              "picture_of_visiting_card": data.picture_of_visiting_card.url if hasattr(data, 'picture_of_visiting_card') else None,
+                              "picture_visited_person":  picture_visited_person,
+                              "picture_of_visiting_card": picture_of_visiting_card,
                               "description": data.description,
                               "created_at": data.created_at,
                               "company_review": data.company_review
