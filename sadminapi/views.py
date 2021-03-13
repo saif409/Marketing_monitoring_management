@@ -207,7 +207,7 @@ class DataList(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        data_list = CollectData.objects.filter(data_collector=self.request.user).reverse()
+        data_list = CollectData.objects.filter(data_collector=self.request.user)[::-1]
         serializer = DataListSerializer(data_list, many=True)
 
         if serializer.data:
