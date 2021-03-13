@@ -250,8 +250,8 @@ class DataDetails(APIView):
                               "contact_no": data.contact_no,
                               "email": data.email,
                               "address": data.address,
-                              "picture_visited_person": data.picture_visited_person.url,
-                              "picture_of_visiting_card": data.picture_of_visiting_card.url,
+                              "picture_visited_person": data.picture_visited_person.url or None,
+                              "picture_of_visiting_card": data.picture_of_visiting_card.url or None,
                               "description": data.description,
                               "created_at": data.created_at,
                               "company_review": data.company_review
