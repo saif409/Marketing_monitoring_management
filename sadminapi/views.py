@@ -238,9 +238,6 @@ class DataDetails(APIView):
 
         data_list = list()
         for data in data_details:
-            picture_visited_person = None
-            picture_of_visiting_card = None
-
             try:
                 picture_visited_person = data.picture_visited_person.url
             except ValueError:
