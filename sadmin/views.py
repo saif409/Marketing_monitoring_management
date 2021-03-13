@@ -430,7 +430,7 @@ def create_data_form(request):
             contact_person_name = request.POST.get("contact_person_name")
             designation_of_contact_person = request.POST.get("designation_of_contact_person")
             service_category_id = request.POST.get("service_category_id")
-            package_name_id = request.POST.get("package_name_id")
+            package_id = request.POST.get("package_id")
             contact_no = request.POST.get("contact_no")
             email = request.POST.get("email")
             address = request.POST.get("address")
@@ -440,7 +440,7 @@ def create_data_form(request):
                                         contact_person_name=contact_person_name,
                                         designation_of_contact_person=designation_of_contact_person,
                                         service_category_id=service_category_id,
-                                        package_name_id=package_name_id, contact_no=contact_no,
+                                        package_id=package_id, contact_no=contact_no,
                                         email=email, address=address, picture_visited_person=picture_visited_person,
                                         description=description)
 

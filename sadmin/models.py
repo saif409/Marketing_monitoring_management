@@ -99,7 +99,7 @@ class CollectData(models.Model):
     contact_person_name = models.CharField(max_length=200)
     designation_of_contact_person = models.CharField(max_length=200)
     service_category = models.ForeignKey(ServiceCategory, on_delete=models.DO_NOTHING)
-    package_name = models.ForeignKey(Package, on_delete=models.DO_NOTHING)
+    package = models.ForeignKey(Package, on_delete=models.DO_NOTHING)
     contact_no = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     address = models.CharField(max_length=200)

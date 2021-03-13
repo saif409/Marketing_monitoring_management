@@ -91,7 +91,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" >Package Name <span style="color:red">*</span></label>
-                        <select name="package_name_id" class="form-control" required>
+                        <select name="package_id" class="form-control" required>
                               <option value="">---</option>
                               {% for package in package_list %}
                                 <option value="{{ package.id }}">{{ package.name }}</option>

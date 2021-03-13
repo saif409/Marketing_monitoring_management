@@ -166,10 +166,10 @@ class DataCollectForm(APIView):
             visited_company_name = request.data.get("visited_company_name")
             contact_person_name = request.data.get("contact_person_name")
             designation_of_contact_person = request.data.get("designation_of_contact_person")
-            service_category = request.data.get("service_category")
-            service_category_obj = ServiceCategory.objects.get(id=service_category)
-            package_name = request.data.get("package_name")
-            package_name_obj = Package.objects.get(id=package_name)
+            service_category_id = request.data.get("service_category")
+            service_category_obj = ServiceCategory.objects.get(id=service_category_id)
+            package_id = request.data.get("package")
+            package_obj = Package.objects.get(id=package_id)
             contact_no = request.data.get("contact_no")
             email = request.data.get("email")
             address = request.data.get("address")
@@ -180,7 +180,7 @@ class DataCollectForm(APIView):
             collector_obj = CollectData(data_collector=request.user, visited_company_name=visited_company_name,
                                         contact_person_name=contact_person_name,
                                         designation_of_contact_person=designation_of_contact_person,
-                                        service_category_id=service_category, package_name_id=package_name,
+                                        service_category_id=service_category_id, package_id=package_id,
                                         contact_no=contact_no, email=email, address=address,
                                         picture_visited_person=picture_visited_person,
                                         picture_of_visiting_card=picture_of_visiting_card, description=description,
@@ -236,11 +236,33 @@ class DataDetails(APIView):
         data_details = CollectData.objects.filter(id=id)
         serializer = DataDetailsSerializer(data_details, many=True)
 
+        data_list = list()
+        for data in data_details:
+            data_dict = dict({"id": 1,
+                              "data_collector": data.data_collector.id,
+                              "visited_company_name": data.visited_company_name,
+                              "contact_person_name": data.contact_person_name,
+                              "designation_of_contact_person": data.designation_of_contact_person,
+                              "service_category_id": data.service_category.id,
+                              "service_category": data.service_category.name,
+                              "package_id": data.package.id,
+                              "package": data.package.name,
+                              "contact_no": data.contact_no,
+                              "email": data.email,
+                              "address": data.address,
+                              "picture_visited_person": data.picture_visited_person.url,
+                              "picture_of_visiting_card": data.picture_of_visiting_card.url,
+                              "description": data.description,
+                              "created_at": data.created_at,
+                              "company_review": data.company_review
+                              })
+            data_list.append(data_dict)
+
         if serializer.data:
             response = {
                 'status_code': status.HTTP_200_OK,
                 'message': 'Success',
-                'data': serializer.data,
+                'data': data_list,
                 'user_id': self.request.user.id
             }
 

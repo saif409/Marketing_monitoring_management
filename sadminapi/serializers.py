@@ -37,24 +37,24 @@ class DataCollectFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = CollectData
         fields = ['data_collector', 'visited_company_name', 'contact_person_name', 'designation_of_contact_person',
-                  'service_category', 'contact_no', 'email', 'address', 'picture_visited_person', 'package_name',
+                  'service_category', 'contact_no', 'email', 'address', 'picture_visited_person', 'package',
                   'description', 'created_at', 'company_review']
 
 
 class DataListSerializer(serializers.ModelSerializer):
     class Meta:
         model = CollectData
-        fields = ['data_collector', 'visited_company_name', 'contact_person_name', 'designation_of_contact_person',
+        fields = ['id', 'data_collector', 'visited_company_name', 'contact_person_name', 'designation_of_contact_person',
                   'service_category', 'contact_no', 'email', 'address', 'picture_visited_person',
-                  'picture_of_visiting_card', 'package_name', 'description', 'created_at', 'company_review']
+                  'picture_of_visiting_card', 'package', 'description', 'created_at', 'company_review']
 
 
 class DataDetailsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CollectData
-        fields = ['data_collector', 'visited_company_name', 'contact_person_name', 'designation_of_contact_person',
-                  'service_category', 'contact_no', 'email', 'address', 'picture_visited_person', 'package_name',
-                  'description', 'created_at', 'company_review']
+        fields = ['id', 'data_collector', 'visited_company_name', 'contact_person_name', 'designation_of_contact_person',
+                  'service_category', 'contact_no', 'email', 'address', 'picture_visited_person',
+                  'picture_of_visiting_card', 'package', 'description', 'created_at', 'company_review']
 
 
 class ServiceListSerializer(serializers.ModelSerializer):
