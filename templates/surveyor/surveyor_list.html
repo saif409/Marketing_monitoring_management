@@ -47,8 +47,9 @@
                 <thead class="thead-light">
                 <tr>
                     <th  data-sort="name">Sl no</th>
-                    <th data-sort="name">Data Collector</th>
+                    <th  data-sort="name">Name</th>
                     <th  data-sort="name">Email</th>
+                    <th  data-sort="name">Phone</th>
                     <th  data-sort="name">Designation</th>
                     <th>Action</th>
                 </tr>
@@ -64,6 +65,9 @@
                                     </td>
                                      <td>
                                         <span class="status">{{ user.email }}</span><br>
+                                    </td>
+                                    <td>
+                                        <span class="status">{{ user.phone }}</span><br>
                                     </td>
                                     <td>
                                         <span class="status">{{ user.designation }}</span>
@@ -143,10 +147,36 @@
 <script>
     $(document).ready(function (){
          $('#surveyorList').DataTable(
-            { language: {
-                searchPlaceholder: "Search records",
-                search: "",
-              }
-        })
+            {
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4]
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4]
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4]
+                        }
+                    },
+                ],
+                columns: [
+                    { "width": "1%" },
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ]
+        });
     })
 </script>

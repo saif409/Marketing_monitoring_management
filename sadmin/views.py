@@ -44,14 +44,15 @@ def admin_home(request):
             "total_data_collector":total_data_collector,
             "total_data_collect":total_data_collect,
             "total_assign_data_collector":total_assign_data_collector,
-            "data": assign_collector_obj
+            "data": assign_collector_obj,
+            "title": "Data Collection Dashboard",
         }
         return render(request, "admin_home.html", context)
     else:
         return redirect('login')
 
 
-def create_collect_form(request):
+def assign_data_collector(request):
     if request.user.is_authenticated:
         surveyors = Surveyor.objects.all()[::-1]
         country_obj = Country.objects.all()
@@ -409,7 +410,8 @@ def collecting_data_list(request):
 
         context={
             "data": data,
-            "isact_datacollectlist":"active"
+            "isact_datacollectlist":"active",
+            'title': "All Collected Data"
         }
         return render(request, "data_collect/data_collection_list.html", context)
     else:

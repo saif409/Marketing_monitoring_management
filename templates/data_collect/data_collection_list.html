@@ -16,7 +16,7 @@
         <div class="card">
             <div class="card-header bg-primary">
                 <div class="row align-items-center">
-                    <h4 class="text-blod" style="padding-left:20px;">All Data Collectors</h4>
+                    <h4 class="text-blod" style="padding-left:20px;">All Collected Data</h4>
                 </div>
                 </div>
                     <div class="container-fluid" style="margin-top:30px;">
@@ -25,9 +25,10 @@
                                 <thead class="thead-light">
                                 <tr>
                                     <th  data-sort="name">Sl no</th>
-
-                                    <th data-sort="name">Company Name</th>
+                                    <th  data-sort="name">Company Name</th>
+                                    <th  data-sort="name">Contact Person</th>
                                     <th  data-sort="name">Designation</th>
+                                    <th  data-sort="name">Phone</th>
                                     <th  data-sort="name">Email</th>
                                     <th>Action</th>
                                 </tr>
@@ -41,8 +42,14 @@
                                                 <small style="color:#fff;background-color:#e8583f;border-radius: 10px;padding-left:5px;padding-right:5px;">{{ data.created_at }}</small>
                                             </td>
                                              <td>
+                                                <span class="status">{{ data.contact_person_name }} </span>
+                                            </td>
+                                             <td>
                                                 <span class="status">{{ data.designation_of_contact_person }}</span>
-                                                <br><small>{{ data.address }}</small>
+{#                                                <br><small>{{ data.address }}</small>#}
+                                            </td>
+                                             <td>
+                                                <span class="status">{{ data.contact_no }}</span>
                                             </td>
                                             <td>
                                                 <span class="status">{{ data.email }}</span>
@@ -91,10 +98,37 @@
 <script>
     $(document).ready( function () {
       $('#dataCollection').DataTable(
-            { language: {
-                searchPlaceholder: "Search records",
-                search: "",
-              }
-        })
+          {
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5]
+                        }
+                    },
+                ],
+                columns: [
+                    { "width": "1%" },
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                  ]
+        });
 } );
 </script>
