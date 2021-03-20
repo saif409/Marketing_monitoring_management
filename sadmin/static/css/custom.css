@@ -1,6 +1,8 @@
 .left-profile img{
-	background-color: red;
-	margin-left: 35%;
+	background-color: white;
+    padding: 10px;
+	/*margin-left: 35%;*/
+    border-radius: 10px;
 }
 .profile-title{
 	margin-left: 17% ;

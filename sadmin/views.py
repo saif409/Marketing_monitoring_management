@@ -67,7 +67,8 @@ def assign_data_collector(request):
             "division":division_obj,
             "district":district_obj,
             "subdistrict":subdistrict_obj,
-            "service_categories": service_categories
+            "service_categories": service_categories,
+            "title": "Assign Data Collector"
         }
         if request.method == "POST":
             company_name = request.POST.get("company_name")
@@ -100,7 +101,8 @@ def view_form(request, id):
 
         obj =get_object_or_404(AssignDataCollector, id=id)
         context={
-            "obj":obj
+            "obj":obj,
+            "title": "Assignment Details"
         }
         return render(request, "assign_data_collector/view_form.html", context)
     return redirect('login')
@@ -130,7 +132,8 @@ def surveyor_list(request, filter):
 
         context ={
             "isact_surveyorlist": "active",
-            "user": user_obj
+            "user": user_obj,
+            "title": "Data Collector List"
         }
         return render(request, "surveyor/surveyor_list.html", context)
     else:
@@ -148,6 +151,7 @@ def view_surveyor(request, id):
             "data":data_obj,
             "total_collect_data":total_collect_data,
             "isact_surveyorlist": "active",
+            "title": "Data Collector Details"
         }
         return render(request, "surveyor/view_surveyor.html", context)
     else:
@@ -182,6 +186,7 @@ def update_surveyor(request, id):
         context ={
             "user": user_obj,
             "isact_surveyorlist": "active",
+            "title": "Update Data Collector"
         }
         return render(request, "surveyor/surveyor_update.html", context)
     else:
@@ -235,7 +240,8 @@ def register_surveyor(request):
             user_obj.save()
             messages.success(request, "Data Collector Create Successfully !!")
         context = {
-            "isact_registersurveyor": "active"
+            "isact_registersurveyor": "active",
+            "title": "Register Data Collector"
         }
         return render(request, "surveyor/register_surveyor.html", context)
     else:
@@ -254,6 +260,7 @@ def country(request):
         context = {
             "get_country": get_country,
             'isact_location': 'active',
+            "title": "Add Country"
         }
         return render(request, "add/add_country.html", context)
     else:
@@ -281,6 +288,7 @@ def add_division(request):
         context = {
             "div_obj": get_page,
             'isact_location': 'active',
+            "title": "Add Division"
         }
         return render(request, "add/add_division.html", context)
     else:
@@ -302,6 +310,7 @@ def add_district(request):
         context = {
             "get_district": get_page,
             'isact_location': 'active',
+            "title": "Add District"
         }
         return render(request, "add/add_district.html", context)
     else:
@@ -314,7 +323,8 @@ def update_district(request, id):
         obj = get_object_or_404(District, id=id)
         context={
             "district":obj,
-            'isact_location': 'active'
+            'isact_location': 'active',
+            "title": "Update District"
         }
         if request.method == "POST":
             obj.district_name = request.POST.get("district")
@@ -346,6 +356,7 @@ def add_sub_district(request):
         context = {
             "get_subdistrct": get_page,
             'isact_location': 'active',
+            "title": "Add Sub District"
         }
         return render(request, "add/add_subdistrict.html", context)
     else:
@@ -357,7 +368,8 @@ def update_sub_district(request, id):
         obj = get_object_or_404(SubDistrict, id=id)
         context={
             "obj":obj,
-            'isact_location': 'active'
+            'isact_location': 'active',
+            "title": "Update Sub District"
         }
         if request.method == "POST":
             obj.sub_district_name = request.POST.get("sub_district")
@@ -383,6 +395,7 @@ def notifications(request):
         context = {
             "user": user_obj,
             'isact_notification': 'active',
+            "title": "Email Notifications"
         }
         if request.method == "POST":
             send_to = request.POST.get('oxdoraitech@gmail.com')
@@ -425,7 +438,8 @@ def create_data_form(request):
         context={
             "isact_createsurvey":"active",
             'package_list': package_list,
-            'service_category_list': service_category_list
+            'service_category_list': service_category_list,
+            "title": "Submit Data"
         }
         if request.method == "POST":
             visited_company_name = request.POST.get("visited_company_name")
@@ -459,7 +473,8 @@ def collect_data_view(request, id):
         data = get_object_or_404(CollectData, id=id)
         context ={
             "data":data,
-            "isact_datacollectlist": "active"
+            "isact_datacollectlist": "active",
+            "title": "Data Details"
         }
         return render(request, "data_collect/collect_data_view.html", context)
     else:
@@ -478,7 +493,8 @@ def update_country(request, id):
         country_obj = get_object_or_404(Country, id=id)
         context = {
             "country":country_obj,
-            'isact_location': 'active'
+            'isact_location': 'active',
+            "title": "Update Country"
         }
         if request.method == "POST":
             country_obj.country_name = request.POST.get("country")
@@ -496,7 +512,8 @@ def update_division(request, id):
         devision_obj = get_object_or_404(Division, id=id)
         context = {
             "division": devision_obj,
-            'isact_location': 'active'
+            'isact_location': 'active',
+            "title": "Update Division"
         }
         if request.method == "POST":
             devision_obj.division_name = request.POST.get("division")
@@ -526,7 +543,8 @@ def add_service_category(request):
         service_category_list = ServiceCategory.objects.all()[::-1]
         context = {
             'isact_service_category': 'active',
-            'service_category_list': service_category_list
+            'service_category_list': service_category_list,
+            "title": "Add Service Category"
         }
         return render(request, "add/add_service_category.html", context)
     else:
@@ -539,7 +557,8 @@ def update_service_category(request, id):
 
         context = {
             "service_category": service_category_obj,
-            'isact_service_category': 'active'
+            'isact_service_category': 'active',
+            "title": "Update Service Category"
         }
 
         if request.method == "POST":
@@ -573,7 +592,8 @@ def add_package(request):
         context = {
             'isact_package': 'active',
             'package_list': package_list,
-            'service_category_list': service_category_list
+            'service_category_list': service_category_list,
+            "title": "Add Package"
 
         }
         return render(request, "add/add_package.html", context)
@@ -589,7 +609,8 @@ def update_package(request, id):
         context = {
             'service_category_list': service_category_list,
             'package': package_obj,
-            'isact_package': 'active'
+            'isact_package': 'active',
+            "title": "Update Package"
         }
 
         if request.method == "POST":
