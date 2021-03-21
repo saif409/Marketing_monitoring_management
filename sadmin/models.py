@@ -108,6 +108,8 @@ class CollectData(models.Model):
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True, auto_now=False)
     company_review = models.IntegerField(choices=REVIEW_CHOICES)
+    longitude = models.CharField(max_length=100, null=True, blank=True)
+    latitude = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.visited_company_name
