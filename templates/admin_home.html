@@ -10,19 +10,23 @@
 
 <div class="row" style="margin-top:40px;">
     <div class="col-lg-4">
-        <div class="widget style1 navy-bg">
-            <div class="row">
-                <div class="col-4">
-                    <i class="fa fa-briefcase fa-5x"></i>
-                </div>
-                <div class="col-8 text-right">
-                    <span> Total Assign Data Collector</span>
-                    <h2 class="font-bold">{{ total_assign_data_collector }}</h2>
+        <a href="{% url 'admin_home' %}">
+            <div class="widget style1 navy-bg">
+                <div class="row">
+                    <div class="col-4">
+                        <i class="fa fa-briefcase fa-5x"></i>
+                    </div>
+                    <div class="col-8 text-right">
+                        <span> Total Assign Data Collector</span>
+                        <h2 class="font-bold">{{ total_assign_data_collector }}</h2>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
+
     <div class="col-lg-4">
+        <a href="{% url 'surveyor_list' filter='None' %}">
         <div class="widget style1 lazur-bg">
             <div class="row">
                 <div class="col-4">
@@ -34,8 +38,11 @@
                 </div>
             </div>
         </div>
+        </a>
     </div>
+
     <div class="col-lg-4">
+        <a href="{% url 'collecting_data_list' %}">
         <div class="widget style1 yellow-bg">
             <div class="row">
                 <div class="col-4">
@@ -47,7 +54,11 @@
                 </div>
             </div>
         </div>
+        </a>
     </div>
+
+
+
     <!--<div class="col-lg-4">-->
         <!--<div class="widget style1 purple-bg">-->
             <!--<div class="row">-->
