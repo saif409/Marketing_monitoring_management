@@ -2,133 +2,144 @@
 {% load static %}
 
 <div class="main-content" id="panel" style="margin-top:10px;">
- {% if messages %}
-    <div class="messages" style="margin-right:32px;">
-    {% for message in messages %}
-        <div class="alert alert-primary" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
-    {% endfor %}
-    </div>
-{% endif %}
+    {% if messages %}
+        <div class="messages" style="margin-right:32px;">
+            {% for message in messages %}
+                <div class="alert alert-primary" {% if message.tags %}
+                     class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
-<div class="row">
-    <div class="row container-fluid" style="margin-top:10px;">
-    <div class="col-md-12" >
-        <div class="card">
-            <div class="card-header bg-primary">
-                <div class="row align-items-center">
-                    <h4 class="text-blod" style="padding-left:20px;">All Collected Data</h4>
-                </div>
-                </div>
+    <div class="row">
+        <div class="row container-fluid" style="margin-top:10px;">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <div class="row align-items-center">
+                            <h4 class="text-blod" style="padding-left:20px;">All Collected Data</h4>
+                        </div>
+                    </div>
                     <div class="container-fluid" style="margin-top:30px;">
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush" id="dataCollection">
                                 <thead class="style1 navy-bg">
                                 <tr>
-                                    <th  data-sort="name">Sl no</th>
-                                    <th  data-sort="name">Company Name</th>
-                                    <th  data-sort="name">Contact Person</th>
-                                    <th  data-sort="name">Designation</th>
-                                    <th  data-sort="name">Phone</th>
-                                    <th  data-sort="name">Email</th>
+                                    <th data-sort="name">Sl no</th>
+                                    <th data-sort="name">Company Name</th>
+                                    <th data-sort="name">Contact Person</th>
+                                    <th data-sort="name">Designation</th>
+                                    <th data-sort="name">Phone</th>
+                                    <th data-sort="name">Email</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                    {% for data in data %}
-                                         <tr>
-                                            <th scope="row"><span class="name mb-0 text-sm"> {{ forloop.counter }} </span></th>
-                                            <td>
-                                                <span class="status">{{ data.visited_company_name }} </span> <br>
-                                                <small style="color:#fff;background-color:#e8583f;border-radius: 10px;padding-left:5px;padding-right:5px;">{{ data.created_at }}</small>
-                                            </td>
-                                             <td>
-                                                <span class="status">{{ data.contact_person_name }} </span>
-                                            </td>
-                                             <td>
-                                                <span class="status">{{ data.designation_of_contact_person }}</span>
-{#                                                <br><small>{{ data.address }}</small>#}
-                                            </td>
-                                             <td>
-                                                <span class="status">{{ data.contact_no }}</span>
-                                            </td>
-                                            <td>
-                                                <span class="status">{{ data.email }}</span>
-                                            </td>
+                                {% for data in data %}
+                                    <tr>
+                                        <th scope="row"><span class="name mb-0 text-sm"> {{ forloop.counter }} </span>
+                                        </th>
+                                        <td>
+                                            <span class="status">{{ data.visited_company_name }} </span> <br>
+                                            <small style="color:#fff;background-color:#e8583f;border-radius: 10px;padding-left:5px;padding-right:5px;">{{ data.created_at }}</small>
+                                        </td>
+                                        <td>
+                                            <span class="status">{{ data.contact_person_name }} </span>
+                                        </td>
+                                        <td>
+                                            <span class="status">{{ data.designation_of_contact_person }}</span>
+                                            {#                                                <br><small>{{ data.address }}</small>#}
+                                        </td>
+                                        <td>
+                                            <span class="status">{{ data.contact_no }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="status">{{ data.email }}</span>
+                                        </td>
 
-                                           <td style="width: 10%">
-                                                    <div class="btn-group">
-                                                        <a href="{% url 'collect_data_view' id=data.id %}" style="margin-right: 5px;"><button class="btn btn-primary fa fa-eye"></button></a>
-                                                        <!--<a href="" style="margin-right: 5px;"><button class="btn btn-info fa fa-edit"></button></a>-->
-                                                        <a href="" data-toggle="modal" id="{{s.id}}" data-target="#surve_delete{{s.id}}"><button class="btn btn-danger fa fa-trash"></button></a>
-                                                    </div>
-                                                </td>
-                                        </tr>
-                                         <div class="modal fade" id="surve_delete{{s.id}}" tabindex="-1" role="dialog"
-                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Are You Sure To Delete The Following Collecting Data?</h5>
-                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">×</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">Company Name : {{ data.visited_company_name }}</div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
-                                                        <a class="btn btn-primary" href="{% url 'collect_data_delete' id=data.id %}">Confirm Delete</a>
-                                                    </div>
+                                        <td style="width: 10%">
+                                            <div class="btn-group">
+                                                <a href="{% url 'collect_data_view' id=data.id %}"
+                                                   style="margin-right: 5px;">
+                                                    <button class="btn btn-primary fa fa-eye"></button>
+                                                </a>
+                                                <!--<a href="" style="margin-right: 5px;"><button class="btn btn-info fa fa-edit"></button></a>-->
+                                                <a href="" data-toggle="modal" id="{{ data.id }}" data-target="#surve_delete{{ data.id }}">
+                                                    <button class="btn btn-danger fa fa-trash"></button>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <div class="modal fade" id="surve_delete{{ data.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Are You Sure To
+                                                        Delete The Following Collecting Data?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Company Name : {{ data.visited_company_name }}</div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-danger" type="button" data-dismiss="modal">
+                                                        Cancel
+                                                    </button>
+                                                    <a class="btn btn-primary"
+                                                       href="{% url 'collect_data_delete' id=data.id %}">Confirm Delete</a>
                                                 </div>
                                             </div>
                                         </div>
-                                    {% endfor %}
-                                </tbody>
-                                        </table>
                                     </div>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 
 {% include 'footer.html' %}
 
 <script>
-    $(document).ready( function () {
-      $('#dataCollection').DataTable(
-          {
+    $(document).ready(function () {
+        $('#dataCollection').DataTable(
+            {
                 dom: 'Bfrtip',
                 buttons: [
                     {
                         extend: 'print',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4, 5]
                         }
                     },
                     {
                         extend: 'excelHtml5',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4, 5]
                         }
                     },
                     {
                         extend: 'pdfHtml5',
                         exportOptions: {
-                            columns: [ 0, 1, 2, 3, 4, 5]
+                            columns: [0, 1, 2, 3, 4, 5]
                         }
                     },
                 ],
                 columns: [
-                    { "width": "1%" },
-                    { "width": "1%" },
-                    { "width": "1%" },
-                    { "width": "1%" },
-                    { "width": "1%" },
-                    { "width": "1%" },
-                    { "width": "1%" }
-                  ]
-        });
-} );
+                    {"width": "1%"},
+                    {"width": "1%"},
+                    {"width": "1%"},
+                    {"width": "1%"},
+                    {"width": "1%"},
+                    {"width": "1%"},
+                    {"width": "1%"}
+                ]
+            });
+    });
 </script>
