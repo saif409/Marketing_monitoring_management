@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
-from .models import Country, District, Division, SubDistrict, ServiceCategory, Package
+from .models import Country, District, Division, SubDistrict, ServiceCategory, Package, NoticeBoard
 from django.contrib import messages
 from django.core.paginator import Paginator
 from.models import SubDistrict,Surveyor,Division,District,CollectData,AssignDataCollector
@@ -38,6 +39,7 @@ def admin_home(request):
         total_data_collector = Surveyor.objects.all().count()
         total_data_collect = CollectData.objects.all().count()
         total_assign_data_collector = AssignDataCollector.objects.all().count()
+        last_notice = NoticeBoard.objects.last()
 
         context={
             "isact_home":"active",
@@ -46,6 +48,7 @@ def admin_home(request):
             "total_assign_data_collector":total_assign_data_collector,
             "data": assign_collector_obj,
             "title": "Data Collection Dashboard",
+            "last_notice": last_notice
         }
         return render(request, "admin_home.html", context)
     else:
@@ -629,6 +632,27 @@ def delete_package(request, id):
     package_obj.delete()
     messages.success(request, "Package Removed Successfully")
     return redirect(add_package)
+
+
+@login_required(login_url='login')
+def create_notice(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        notice_desc = request.POST.get("notice_desc")
+        notice_image = request.FILES.get("notice_image")
+        notice_obj = NoticeBoard(title=title, notice_desc=notice_desc, notice_image=notice_image)
+        notice_obj.save()
+        messages.success(request, "Notice Added Successfully")
+
+    context = {
+        'isact_notice': 'active',
+        "title": "Add Notice"
+
+    }
+    return render(request, "add/add_notice.html", context)
+
+
+
 
 
 

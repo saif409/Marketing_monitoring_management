@@ -1,14 +1,12 @@
 {% include 'header.html' %}
 {% load static %}
- {% if messages %}
+{% if messages %}
     <div class="messages" style="margin-right:32px;">
     {% for message in messages %}
         <div class="alert alert-primary" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
     {% endfor %}
     </div>
 {% endif %}
-
-
 
 <div class="row" style="margin-top:40px;">
     <div class="col-lg-4">
@@ -66,13 +64,35 @@
 </div>
 
 <div class="row">
-
     <div class="row container-fluid" style="margin-top:30px;">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row align-items-center">
-                        <h2 class="text-blod" style="padding-left:20px;">Recently Created Forms</h2>
+                        <h2 class="text-blod" style="padding-left:20px;">Notice Board</h2>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    {% if last_notice.notice_image %}
+                        <img src="{{ last_notice.notice_image.url }}" alt="Notice Image" class="card-img-top zoom" >
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ last_notice.title }}</h3>
+                        <p class="card-text">{{ last_notice.notice_desc }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="row container-fluid" style="margin-top:30px;">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <h2 class="text-blod" style="padding-left:20px;">Recently Assigned Task</h2>
                     </div>
                 </div>
                 <div class="container-fluid" style="margin-top:30px;">

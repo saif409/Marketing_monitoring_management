@@ -129,3 +129,11 @@ class AssignDataCollector(models.Model):
         return self.company_name
 
 
+class NoticeBoard(models.Model):
+    title = models.CharField(max_length=200)
+    notice_desc = models.CharField(max_length=1000)
+    notice_image = models.ImageField(null=True, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+
+
