@@ -15,8 +15,9 @@ Including another URLconf
 """
 
 from django.urls import path
-from reportloginapi.views import custom_auth_token
+from reportloginapi.views import custom_auth_token, Logout
 
 urlpatterns = [
     path('token/', custom_auth_token, name='api_token_auth'),
+    path('logout/', Logout.as_view()),
 ]

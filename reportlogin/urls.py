@@ -31,7 +31,7 @@ urlpatterns = [
     path('api-browse/', include(router.urls)),
     path('api-browse-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    path('api-login/', include("reportloginapi.urls")),
+    path('api-auth/', include("reportloginapi.urls")),
     path('api/', include('sadminapi.urls')),
 ]
 
