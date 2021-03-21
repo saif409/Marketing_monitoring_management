@@ -64,5 +64,21 @@ custom_auth_token = CustomAuthToken.as_view()
 
 class Logout(APIView):
     def post(self, request):
-        request.user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
+        try:
+            request.user.auth_token.delete()
+
+            response = {
+                'status_code': status.HTTP_200_OK,
+                'message': 'Successfully Logged out',
+                'user_id': request.user.id
+            }
+
+        except Exception as e:
+            response = {
+                'status_code': status.HTTP_400_BAD_REQUEST,
+                'message': str(e),
+                'user_id': request.user.id
+            }
+
+        return Response(response, status=response.get('status_code'))
+
