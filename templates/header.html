@@ -41,7 +41,7 @@
                         <li class="dashboard {{ isact_home }}" >
                             <a href="{% url 'admin_home' %}"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
                         </li>
-                        <li class="dashboard {{ isact_assigndatacollector }}" >
+                        <li class="assign {{ isact_assigndatacollector }}" >
                             <a href="{% url 'assign_data_collector' %}"><i class="fa fa-grav" aria-hidden="true"></i><span class="nav-label">Assign Data Collector</span></a>
                         </li>
                         <li class="allsurvey {{ isact_datacollectlist }}" >
@@ -50,7 +50,7 @@
                         <li class="survey add {{ isact_createsurvey }}">
                             <a href="{% url 'create_data_form' %}"><i class="fa fa-plus-square-o"></i> <span class="nav-label">Submit Data</span></a>
                         </li>
-                        <li class=" surveyorlist {{ isact_surveyorlist }}">
+                        <li class="surveyorlist {{ isact_surveyorlist }}">
                             <a href="{% url 'surveyor_list' filter='None' %}"><i class="fa fa-list"></i> <span class="nav-label">All Collectors</span></a>
                         </li>
                         <li class="createsurvey {{ isact_registersurveyor }}">
@@ -62,15 +62,18 @@
                         <li class="service-category {{ isat_service_category }}">
                             <a href="{% url 'add_service_category' %}"><i class="fa fa-list"></i> <span class="nav-label">Add Service Category</span></a>
                         </li>
-                        <li class="service-category {{ isact_package }}">
+                        <li class="package {{ isact_package }}">
                             <a href="{% url 'add_package' %}"><i class="fa fa-list"></i> <span class="nav-label">Add Package</span></a>
                         </li>
                         <li class="notice {{ isact_notice }}">
                             <a href="{% url 'create_notice' %}"><i class="fa fa-list"></i> <span class="nav-label">Add Notice</span></a>
                         </li>
-                        <li class="notification {{ isact_notification }}">
-                        <a href="{% url 'notifications' %}"><i class="fa fa-bell"></i><span class="nav-label">Notifications</span></a>
-                    </li>
+                        <li class="auth-log {{ isact_auth_log }}">
+                            <a href="{% url 'auth_log' %}"><i class="fa fa-list"></i> <span class="nav-label">Auth Log</span></a>
+                        </li>
+{#                        <li class="notification {{ isact_notification }}">#}
+{#                            <a href="{% url 'notifications' %}"><i class="fa fa-bell"></i><span class="nav-label">Notifications</span></a>#}
+{#                        </li>#}
                     {% endif %}
 
                     {% if request.user.user_info.first.role == 2  %}
@@ -83,15 +86,15 @@
                         <li class=" surveyorlist {{ isact_surveyorlist }}">
                             <a href="{% url 'surveyor_list' filter='None' %}"><i class="fa fa-list"></i> <span class="nav-label">All Collectors</span></a>
                         </li>
+                        <li class="auth-log {{ isact_auth_log }}">
+                            <a href="{% url 'auth_log' %}"><i class="fa fa-list"></i> <span class="nav-label">Auth Log</span></a>
+                        </li>
                     {% endif %}
 
 
                     {% if request.user.user_info.first.role == 3  %}
                         <li class="dashboard {{ isact_home }}" >
                             <a href="{% url 'admin_home' %}"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
-                        </li>
-                        <li class="notice {{ isact_notice }}">
-                            <a href="{% url 'create_notice' %}"><i class="fa fa-list"></i> <span class="nav-label">Add Notice</span></a>
                         </li>
                         <li class=" surveyorlist {{ isact_surveyorlist }}">
                             <a href="{% url 'surveyor_list' filter='None' %}"><i class="fa fa-list"></i> <span class="nav-label">All Collectors</span></a>

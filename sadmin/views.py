@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
-from .models import Country, District, Division, SubDistrict, ServiceCategory, Package, NoticeBoard
+from .models import Country, District, Division, SubDistrict, ServiceCategory, Package, NoticeBoard, AuthLogs
 from django.contrib import messages
 from django.core.paginator import Paginator
 from.models import SubDistrict,Surveyor,Division,District,CollectData,AssignDataCollector
@@ -652,6 +652,15 @@ def create_notice(request):
     return render(request, "add/add_notice.html", context)
 
 
+@login_required(login_url='login')
+def auth_log(request):
+    auth_logs = AuthLogs.objects.all()[::-1]
+    context = {
+        "auth_logs": auth_logs,
+        'isact_auth_log': 'active',
+        "title": "All Auth Log",
+    }
+    return render(request, "auth-audit/auth-log-list.html", context)
 
 
 

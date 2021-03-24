@@ -56,5 +56,6 @@ urlpatterns = [
     path('update-package/<int:id>/', views.update_package, name="update_package"),
     path('delete-package/<int:id>/', views.delete_package, name="delete_package"),
     path('create-notice/', views.create_notice, name="create_notice"),
+    path('auth-log/', views.auth_log, name="auth_log"),
 
 ]

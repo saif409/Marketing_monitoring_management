@@ -1,0 +1,112 @@
+{% include 'header.html' %}
+{% load static %}
+
+<div class="row">
+    <div class="row container-fluid">
+        <div class="col-md-12" >
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <div class="row align-items-center">
+                        <h4 class="text-blod" style="padding-left:20px;">Auth Logs</h4>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container-fluid" >
+                <div class="col-md-12 mt-2 mb-4">
+                    <div class="table-responsive">
+                    <table class="table align-items-center table-flush" id="auth-logs">
+                        <thead class="style1 navy-bg">
+                        <tr>
+                            <th  data-sort="name">Sl no</th>
+                            <th  data-sort="name">Action</th>
+                            <th  data-sort="name">IP</th>
+                            <th  data-sort="name">Username</th>
+                            <th  data-sort="name">Device Name</th>
+                            <th  data-sort="name">Device Username</th>
+                            <th  data-sort="name">Operating System</th>
+                            <th  data-sort="name">Used Application</th>
+                            <th  data-sort="name">DateTime</th>
+                        </tr>
+                        </thead>
+                        <tbody class="list">
+                            {% for log in auth_logs %}
+                                <tr>
+                                    <th scope="row"><span class="name mb-0 text-sm">{{ forloop.counter }}</span></th>
+                                    <td>
+                                        <span class="status">{{ log.action }}</span><br>
+                                    </td>
+                                     <td>
+                                        <span class="status">{{ log.ip }}</span><br>
+                                    </td>
+                                    <td>
+                                        <span class="status">{{ log.app_username }}</span><br>
+                                    </td>
+                                    <td>
+                                        <span class="status">{{ log.device_name }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="status">{{ log.device_username }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="status">{{ log.operating_system }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="status">{{ log.request_sender_app }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="status">{{ log.created_at }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
+<script>
+    $(document).ready(function (){
+         $('#auth-logs').DataTable(
+            {
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        exportOptions: {
+                            columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        }
+                    },
+                ],
+                columns: [
+                    { "width": "1%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                    { "width": "5%" },
+                  ]
+        });
+    })
+</script>

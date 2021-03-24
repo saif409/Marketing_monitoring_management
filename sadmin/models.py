@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
+from django.contrib.auth.signals import user_logged_in, user_logged_out, user_login_failed
+from django.dispatch import receiver
 
 
 # Create your models here.
@@ -138,4 +139,60 @@ class NoticeBoard(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 
+class AuthLogs(models.Model):
+    action = models.CharField(max_length=64)
+    ip = models.GenericIPAddressField(null=True)
+    app_username = models.CharField(max_length=256, null=True, blank=True)
+    user_fullname = models.CharField(max_length=256, null=True, blank=True)
+    device_username = models.CharField(max_length=256, null=True, blank=True)
+    device_name = models.CharField(max_length=256, null=True, blank=True)
+    operating_system = models.CharField(max_length=256, null=True, blank=True)
+    request_sender_app = models.CharField(max_length=256, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, auto_now=False, blank=True)
 
+    def __unicode__(self):
+        return '{0} - {1} - {2}'.format(self.action, self.username, self.ip)
+
+    def __str__(self):
+        return '{0} - {1} - {2}'.format(self.action, self.username, self.ip)
+
+
+@receiver(user_logged_in)
+def user_logged_in_callback(sender, request, user, **kwargs):
+    ip = request.META.get('REMOTE_ADDR')
+    user_fullname = user.first_name + " " + user.first_name
+    device_name = request.META.get('COMPUTERNAME')
+    device_username = request.META.get('USERNAME')
+    operating_system = request.META.get('OS')
+    request_sender_app = request.META.get('HTTP_USER_AGENT')
+
+    AuthLogs.objects.create(action='user_logged_in', ip=ip, user_fullname=user_fullname, app_username=user.username, device_name=device_name,
+                            device_username=device_username, operating_system=operating_system,
+                            request_sender_app=request_sender_app)
+
+
+@receiver(user_logged_out)
+def user_logged_out_callback(sender, request, user, **kwargs):
+    ip = request.META.get('REMOTE_ADDR')
+    user_fullname = user.first_name + " " + user.last_name
+    device_name = request.META.get('COMPUTERNAME')
+    device_username = request.META.get('USERNAME')
+    operating_system = request.META.get('OS')
+    request_sender_app = request.META.get('HTTP_USER_AGENT')
+
+    AuthLogs.objects.create(action='user_logged_out', ip=ip, user_fullname=user_fullname, app_username=user.username, device_name=device_name,
+                            device_username=device_username, operating_system=operating_system,
+                            request_sender_app=request_sender_app)
+
+
+@receiver(user_login_failed)
+def user_login_failed_callback(sender, request, credentials, **kwargs):
+    ip = request.META.get('REMOTE_ADDR')
+    device_name = request.META.get('COMPUTERNAME')
+    device_username = request.META.get('USERNAME')
+    operating_system = request.META.get('OS')
+    request_sender_app = request.META.get('HTTP_USER_AGENT')
+
+    AuthLogs.objects.create(action='user_login_failed', ip=ip, app_username=credentials.get('username', None),
+                            device_name=device_name, device_username=device_username,
+                            operating_system=operating_system, request_sender_app=request_sender_app)
